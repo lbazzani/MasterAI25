@@ -40,4 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/data
+# data folder - ignore everything except system-prompt.txt
+/data/*
+!/data/system-prompt.txt

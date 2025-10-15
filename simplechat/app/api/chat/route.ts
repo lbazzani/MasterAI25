@@ -10,10 +10,23 @@ const openai = new OpenAI({
 const DATA_DIR = path.join(process.cwd(), 'data');
 const MESSAGES_FILE = path.join(DATA_DIR, 'messages.json');
 const SYSTEM_PROMPT_FILE = path.join(DATA_DIR, 'system-prompt.txt');
+const MENU_DATA_FILE = path.join(DATA_DIR, 'menu-data.json');
 
 interface Message {
   role: 'system' | 'user' | 'assistant';
   content: string;
+}
+
+interface MenuItem {
+  nome: string;
+  descrizione: string;
+  prezzo: number;
+  categoria: string;
+}
+
+interface AIResponse {
+  data: MenuItem[];
+  message: string;
 }
 
 async function readMessages(): Promise<Message[]> {
@@ -37,6 +50,19 @@ async function readSystemPrompt(): Promise<string> {
   }
 }
 
+async function readMenuData(): Promise<MenuItem[]> {
+  try {
+    const data = await fs.readFile(MENU_DATA_FILE, 'utf-8');
+    return JSON.parse(data);
+  } catch (error) {
+    return [];
+  }
+}
+
+async function writeMenuData(menuData: MenuItem[]): Promise<void> {
+  await fs.writeFile(MENU_DATA_FILE, JSON.stringify(menuData, null, 2));
+}
+
 // POST - Invia un nuovo messaggio
 export async function POST(req: NextRequest) {
   try {
@@ -56,9 +82,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Leggi i messaggi esistenti e il prompt di sistema
+    // Leggi i messaggi esistenti, il prompt di sistema e i dati del menu
     const messages = await readMessages();
     const systemPrompt = await readSystemPrompt();
+    const currentMenuData = await readMenuData();
 
     // Aggiungi il messaggio dell'utente
     const userMessage: Message = {
@@ -67,21 +94,48 @@ export async function POST(req: NextRequest) {
     };
     messages.push(userMessage);
 
+    // Prepara il prompt con il contesto del menu esistente
+    let enhancedSystemPrompt = systemPrompt;
+    if (currentMenuData.length > 0) {
+      enhancedSystemPrompt += `\n\nMENU CORRENTE:\n${JSON.stringify(currentMenuData, null, 2)}\n\nQuando rispondi, includi sempre tutti i piatti del menu corrente nell'array "data", anche se non modificati.`;
+    }
+
     // Prepara i messaggi per OpenAI (con system prompt)
     const openAIMessages = [
-      { role: 'system' as const, content: systemPrompt },
+      { role: 'system' as const, content: enhancedSystemPrompt },
       ...messages,
     ];
 
-    // Chiama OpenAI
+    // Chiama OpenAI con response_format json_object
     const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-3.5-turbo-1106', // Modello che supporta JSON mode
       messages: openAIMessages,
+      response_format: { type: 'json_object' },
     });
 
+    const responseContent = completion.choices[0].message.content || '{}';
+
+    // Parse della risposta JSON
+    let parsedResponse: AIResponse;
+    try {
+      parsedResponse = JSON.parse(responseContent);
+    } catch (parseError) {
+      console.error('Error parsing JSON response:', parseError);
+      parsedResponse = {
+        data: currentMenuData,
+        message: responseContent,
+      };
+    }
+
+    // Salva i nuovi dati del menu
+    if (parsedResponse.data && Array.isArray(parsedResponse.data)) {
+      await writeMenuData(parsedResponse.data);
+    }
+
+    // Crea il messaggio dell'assistente con la risposta completa
     const assistantMessage: Message = {
       role: 'assistant',
-      content: completion.choices[0].message.content || '',
+      content: JSON.stringify(parsedResponse),
     };
 
     // Aggiungi la risposta dell'assistente
@@ -91,7 +145,8 @@ export async function POST(req: NextRequest) {
     await writeMessages(messages);
 
     return NextResponse.json({
-      message: assistantMessage,
+      message: parsedResponse.message,
+      data: parsedResponse.data,
       allMessages: messages,
     });
   } catch (error: any) {
@@ -103,29 +158,31 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// GET - Ottieni tutti i messaggi
+// GET - Ottieni tutti i messaggi e i dati del menu
 export async function GET() {
   try {
     const messages = await readMessages();
-    return NextResponse.json({ messages });
+    const menuData = await readMenuData();
+    return NextResponse.json({ messages, menuData });
   } catch (error: any) {
-    console.error('Error reading messages:', error);
+    console.error('Error reading data:', error);
     return NextResponse.json(
-      { error: 'Failed to read messages' },
+      { error: 'Failed to read data' },
       { status: 500 }
     );
   }
 }
 
-// DELETE - Cancella tutti i messaggi
+// DELETE - Cancella tutti i messaggi e i dati del menu
 export async function DELETE() {
   try {
     await writeMessages([]);
+    await writeMenuData([]);
     return NextResponse.json({ success: true });
   } catch (error: any) {
-    console.error('Error deleting messages:', error);
+    console.error('Error deleting data:', error);
     return NextResponse.json(
-      { error: 'Failed to delete messages' },
+      { error: 'Failed to delete data' },
       { status: 500 }
     );
   }
