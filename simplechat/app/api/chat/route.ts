@@ -102,13 +102,22 @@ export async function POST(req: NextRequest) {
 
     // Prepara i messaggi per OpenAI (con system prompt)
     const openAIMessages = [
+<<<<<<< HEAD
       { role: 'system' as const, content: enhancedSystemPrompt },
       ...messages,
+=======
+      { role: 'system' as const, content: systemPrompt },
+      ...messages.slice(-5),
+>>>>>>> refs/remotes/origin/main
     ];
 
     // Chiama OpenAI con response_format json_object
     const completion = await openai.chat.completions.create({
+<<<<<<< HEAD
       model: 'gpt-3.5-turbo-1106', // Modello che supporta JSON mode
+=======
+      model: 'gpt-5-mini',
+>>>>>>> refs/remotes/origin/main
       messages: openAIMessages,
       response_format: { type: 'json_object' },
     });
