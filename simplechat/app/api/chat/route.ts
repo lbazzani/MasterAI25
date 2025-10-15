@@ -70,12 +70,12 @@ export async function POST(req: NextRequest) {
     // Prepara i messaggi per OpenAI (con system prompt)
     const openAIMessages = [
       { role: 'system' as const, content: systemPrompt },
-      ...messages,
+      ...messages.slice(-5),
     ];
 
     // Chiama OpenAI
     const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-5-mini',
       messages: openAIMessages,
     });
 
