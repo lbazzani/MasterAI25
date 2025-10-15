@@ -1,0 +1,3 @@
+# Questa cartella contiene i dati della chat
+# messages.json - Stack dei messaggi della conversazione
+# system-prompt.txt - Prompt di sistema per ChatGPT

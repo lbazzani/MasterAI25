@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   TextField,
@@ -11,8 +11,11 @@ import {
   CircularProgress,
   ThemeProvider,
   createTheme,
+  IconButton,
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
+import DeleteIcon from '@mui/icons-material/Delete';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 const theme = createTheme({
   palette: {
@@ -44,12 +47,28 @@ export default function Home() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Carica i messaggi all'avvio
+  useEffect(() => {
+    loadMessages();
+  }, []);
+
+  const loadMessages = async () => {
+    try {
+      const response = await fetch('/api/chat');
+      const data = await response.json();
+      if (response.ok) {
+        setMessages(data.messages);
+      }
+    } catch (error) {
+      console.error('Error loading messages:', error);
+    }
+  };
+
   const sendMessage = async () => {
     if (!input.trim()) return;
 
     const userMessage: Message = { role: 'user', content: input };
-    const newMessages = [...messages, userMessage];
-    setMessages(newMessages);
+    setMessages([...messages, userMessage]);
     setInput('');
     setLoading(true);
 
@@ -60,17 +79,19 @@ export default function Home() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          messages: newMessages,
+          message: input,
         }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setMessages([...newMessages, data.message]);
+        // Aggiorna con tutti i messaggi dal server
+        setMessages(data.allMessages);
       } else {
         setMessages([
-          ...newMessages,
+          ...messages,
+          userMessage,
           {
             role: 'assistant',
             content: `Error: ${data.error}`,
@@ -79,7 +100,8 @@ export default function Home() {
       }
     } catch (error) {
       setMessages([
-        ...newMessages,
+        ...messages,
+        userMessage,
         {
           role: 'assistant',
           content: 'Error: Failed to connect to the server',
@@ -87,6 +109,22 @@ export default function Home() {
       ]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const clearMessages = async () => {
+    if (!confirm('Vuoi cancellare tutta la conversazione?')) return;
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setMessages([]);
+      }
+    } catch (error) {
+      console.error('Error clearing messages:', error);
     }
   };
 
@@ -124,11 +162,30 @@ export default function Home() {
                 p: 2,
                 borderBottom: '1px solid #bdbdbd',
                 backgroundColor: '#616161',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
               }}
             >
               <Typography variant="h5" sx={{ color: '#ffffff' }}>
                 SimpleChat - ChatGPT Test
               </Typography>
+              <Box>
+                <IconButton
+                  onClick={loadMessages}
+                  sx={{ color: '#ffffff', mr: 1 }}
+                  title="Ricarica messaggi"
+                >
+                  <RefreshIcon />
+                </IconButton>
+                <IconButton
+                  onClick={clearMessages}
+                  sx={{ color: '#ffffff' }}
+                  title="Cancella conversazione"
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </Box>
             </Box>
 
             <Box
