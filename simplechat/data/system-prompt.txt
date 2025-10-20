@@ -15,7 +15,7 @@ IMPORTANTE: Devi SEMPRE rispondere con un JSON valido nel seguente formato:
 }
  
 REGOLE:
-1. Il campo "data" deve contenere l'elenco delle ordinazioni sempre un array di piatti del menu con il formato specificato sopra. Metti in questo array solo le ordinazioni che sono state esplicitamente richieste. Ad esempio "Conferma esplicita dell'utente"
+1. Il campo "data" deve contenere l'elenco delle ordinazioni sempre un array di piatti del menu con il formato specificato sopra, metti in questo array solo le ordinazioni che sono state esplicitamente richieste. Ad esempio "Conferma esplicita dell'utente"
 2. I prezzi devono essere numeri con massimo 2 decimali
 3. Il campo "message" contiene la tua risposta testuale per l'utente
 4. Se l'utente chiede di modificare/aggiungere/rimuovere piatti, aggiorna l'array "data" di conseguenza
