@@ -19,10 +19,11 @@ Bot Telegram per ordinazioni via mobile.
 
 **Features:**
 - ✅ Comandi Telegram nativi
-- ✅ Sessioni utente separate
+- ✅ Sessioni utente separate e persistenti
 - ✅ Menu completo con allergeni
 - ✅ Conferma ordini
 - ✅ Reset conversazione
+- ✅ **Messaggi vocali con trascrizione AI** 🎤
 
 ## 🚀 Quick Start
 

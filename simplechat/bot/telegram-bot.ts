@@ -123,13 +123,10 @@ async function downloadVoiceFile(fileId: string): Promise<string> {
   const fileName = `voice_${Date.now()}.ogg`;
   const filePath = path.join(TELEGRAM_AUDIO_DIR, fileName);
 
-  // Download del file
-  const file = await fs.open(filePath, 'w');
-
   return new Promise((resolve, reject) => {
     const protocol = fileLink.startsWith('https:') ? https : http;
     protocol.get(fileLink, (response) => {
-      const stream = response.pipe(require('fs').createWriteStream(filePath));
+      const stream = response.pipe(fsSync.createWriteStream(filePath));
       stream.on('finish', () => {
         stream.close();
         resolve(filePath);
@@ -141,11 +138,8 @@ async function downloadVoiceFile(fileId: string): Promise<string> {
 
 // Trascrivi audio con OpenAI Whisper
 async function transcribeAudio(filePath: string): Promise<string> {
-  const audioFile = await fs.readFile(filePath);
-  const file = new File([audioFile], path.basename(filePath), { type: 'audio/ogg' });
-
   const transcription = await openai.audio.transcriptions.create({
-    file: file,
+    file: fsSync.createReadStream(filePath),
     model: 'whisper-1',
     language: 'it',
   });
@@ -219,9 +213,10 @@ async function clearUserSession(userId: number): Promise<void> {
 // Crea bot
 const bot = new TelegramBot(TELEGRAM_TOKEN, { polling: true });
 
-// Inizializza directory sessioni
+// Inizializza directory sessioni e audio
 (async () => {
   await ensureSessionsDir();
+  await ensureAudioDir();
 })();
 
 console.log('🤖 Bot Telegram avviato con successo!');
@@ -447,6 +442,129 @@ bot.on('message', async (msg) => {
     console.error(`\n❌ ERRORE per @${username}:`, error.message);
     console.error('Stack:', error.stack);
     bot.sendMessage(chatId, '❌ Mi dispiace, si è verificato un errore. Riprova tra poco.');
+  }
+});
+
+// Gestione messaggi vocali
+bot.on('voice', async (msg) => {
+  const chatId = msg.chat.id;
+  const userId = msg.from?.id;
+  const username = msg.from?.username || msg.from?.first_name || 'Sconosciuto';
+  const voice = msg.voice;
+
+  if (!userId || !voice) return;
+
+  console.log(`\n🎤 Messaggio vocale ricevuto da @${username} (${voice.duration}s)`);
+
+  let audioFilePath: string | null = null;
+
+  try {
+    // Mostra che sta "ascoltando"
+    bot.sendChatAction(chatId, 'typing');
+    bot.sendMessage(chatId, '🎧 Sto ascoltando il tuo messaggio vocale...');
+
+    // 1. Scarica il file audio
+    console.log(`⬇️  Download audio in corso...`);
+    audioFilePath = await downloadVoiceFile(voice.file_id);
+    console.log(`✅ Audio scaricato: ${audioFilePath}`);
+
+    // 2. Trascrivi con Whisper
+    console.log(`🔤 Trascrizione in corso...`);
+    const transcribedText = await transcribeAudio(audioFilePath);
+    console.log(`✅ Trascrizione completata: "${transcribedText.substring(0, 50)}..."`);
+
+    // 3. Pulisci file temporaneo
+    await cleanupAudioFile(audioFilePath);
+    audioFilePath = null;
+
+    // 4. Mostra la trascrizione all'utente
+    bot.sendMessage(chatId, `📝 *Ho capito:* "${transcribedText}"`, { parse_mode: 'Markdown' });
+
+    // 5. Processa il testo come un messaggio normale
+    bot.sendChatAction(chatId, 'typing');
+
+    // Recupera la sessione utente
+    const session = await getUserSession(userId);
+
+    // Leggi system prompt e menu
+    const systemPrompt = await readSystemPrompt();
+    const menuProducts = await readMenuProducts();
+
+    // Crea messaggio utente
+    const userMessage: Message = {
+      role: 'user',
+      content: transcribedText,
+    };
+    session.messages.push(userMessage);
+
+    // Prepara il prompt con il menu e le ordinazioni correnti
+    let enhancedSystemPrompt = systemPrompt;
+    enhancedSystemPrompt += `\n\n${JSON.stringify(menuProducts, null, 2)}`;
+
+    if (session.orders.length > 0) {
+      enhancedSystemPrompt += `\n\nORDINAZIONI CORRENTI:\n${JSON.stringify(session.orders, null, 2)}\n\nQuando rispondi, includi sempre tutti i piatti ordinati nell'array "data", anche se non modificati.`;
+    }
+
+    // Chiama OpenAI
+    const openAIMessages = [
+      { role: 'system' as const, content: enhancedSystemPrompt },
+      ...session.messages.slice(-5),
+    ];
+
+    console.log(`🤖 Chiamata a OpenAI (${session.messages.length} messaggi in sessione)...`);
+
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: openAIMessages,
+      response_format: { type: 'json_object' },
+      temperature: 0.7,
+    });
+
+    const responseContent = completion.choices[0].message.content || '{}';
+    const parsedResponse: AIResponse = JSON.parse(responseContent);
+
+    console.log(`✅ Risposta AI ricevuta: ${parsedResponse.data?.length || 0} articoli nell'ordine`);
+
+    // Salva risposta dell'assistente
+    const assistantMessage: Message = {
+      role: 'assistant',
+      content: JSON.stringify(parsedResponse),
+    };
+    session.messages.push(assistantMessage);
+
+    // Aggiorna gli ordini
+    if (parsedResponse.data && Array.isArray(parsedResponse.data)) {
+      session.orders = parsedResponse.data;
+    }
+
+    // Salva la sessione
+    await saveUserSession(userId, session);
+
+    // Invia risposta all'utente
+    let responseText = parsedResponse.message;
+
+    // Se l'ordine è chiuso, aggiungi il riepilogo
+    if (parsedResponse.orderClosed && session.orders.length > 0) {
+      const total = session.orders.reduce((sum, item) => sum + item.prezzo, 0);
+      responseText += `\n\n✅ *ORDINE CONFERMATO!*\n\n`;
+      responseText += `📦 Totale articoli: ${session.orders.length}\n`;
+      responseText += `💰 Totale: €${total.toFixed(2)}`;
+      console.log(`🎉 Ordine confermato per @${username}! Totale: €${total.toFixed(2)}`);
+    }
+
+    bot.sendMessage(chatId, responseText, { parse_mode: 'Markdown' });
+    console.log(`📤 Risposta inviata a @${username}`);
+
+  } catch (error: any) {
+    console.error(`\n❌ ERRORE trascrizione per @${username}:`, error.message);
+    console.error('Stack:', error.stack);
+
+    // Pulisci file se esiste ancora
+    if (audioFilePath) {
+      await cleanupAudioFile(audioFilePath);
+    }
+
+    bot.sendMessage(chatId, '❌ Mi dispiace, non sono riuscito a capire il messaggio vocale. Puoi riprovare o scrivere un messaggio di testo?');
   }
 });
 

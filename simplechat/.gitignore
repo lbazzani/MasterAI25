@@ -51,6 +51,10 @@ next-env.d.ts
 /data/telegram-sessions/*
 !/data/telegram-sessions/.gitkeep
 
+# Telegram audio - ignore temporary audio files
+/data/telegram-audio/*
+!/data/telegram-audio/.gitkeep
+
 # Keep these files
 !/data/system-prompt.txt
 !/data/menu.json
