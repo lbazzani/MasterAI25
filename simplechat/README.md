@@ -272,6 +272,9 @@ npm run build
 
 - [Setup Bot Telegram](./TELEGRAM_BOT_SETUP.md)
 - [Bot Documentation](./bot/README.md)
+- [Sessioni Utente](./bot/SESSIONS.md)
+- [Messaggi Vocali](./bot/VOICE.md) 🎤
+- [Log e Debugging](./bot/LOGS.md)
 - [Next.js Docs](https://nextjs.org/docs)
 - [Material-UI Docs](https://mui.com/)
 

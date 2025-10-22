@@ -1,10 +1,10 @@
 # 🎤 Messaggi Vocali - Guida Completa
 
-Il bot supporta messaggi vocali con trascrizione automatica tramite OpenAI Whisper API.
+Il bot supporta messaggi vocali bidirezionali con trascrizione (Speech-to-Text) e sintesi vocale (Text-to-Speech).
 
 ## 🎯 Come Funziona
 
-### Flusso Completo
+### Flusso Completo con Risposta Vocale
 
 ```
 1. 🎤 Utente registra messaggio vocale
@@ -12,21 +12,22 @@ Il bot supporta messaggi vocali con trascrizione automatica tramite OpenAI Whisp
 3. 🔤 OpenAI Whisper trascrive l'audio in testo
 4. 📝 Bot mostra la trascrizione all'utente
 5. 🤖 Bot processa il testo come messaggio normale
-6. 💬 Bot risponde all'ordinazione
-7. 🗑️  File audio temporaneo viene cancellato
+6. 🔊 Bot genera audio della risposta (TTS)
+7. 🎧 Bot invia messaggio vocale come risposta
+8. 🗑️  File audio temporanei vengono cancellati
 ```
 
 ### Esempio Conversazione
 
 ```
-👤 [Invia messaggio vocale: "Vorrei una Margherita e una Coca Cola"]
+👤 🎤 [Vocale: "Vorrei una Margherita e una Coca Cola"]
 
 🤖 🎧 Sto ascoltando il tuo messaggio vocale...
 🤖 📝 Ho capito: "Vorrei una Margherita e una Coca Cola"
-🤖 Perfetto! Ho aggiunto al tuo ordine:
-   - Margherita (€7.00)
-   - Coca Cola (€3.00)
+🤖 🔊 [Risposta vocale: "Perfetto! Ho aggiunto al tuo ordine: Margherita per 7 euro e Coca Cola per 3 euro"]
 ```
+
+**Nota**: Se l'utente invia un messaggio vocale, riceve risposta vocale! 🎧
 
 ## ⚙️ Configurazione Tecnica
 
@@ -35,38 +36,55 @@ Il bot supporta messaggi vocali con trascrizione automatica tramite OpenAI Whisp
 1. **Telegram Bot API**
    - `getFileLink(fileId)` - Ottiene URL download file
    - Download file `.ogg` (formato vocale Telegram)
+   - `sendVoice(chatId, audio)` - Invia messaggio vocale
 
-2. **OpenAI Whisper API**
+2. **OpenAI Whisper API (Speech-to-Text)**
    - Model: `whisper-1`
    - Language: `it` (italiano)
    - Input: Stream audio `.ogg`
    - Output: Testo trascritto
+
+3. **OpenAI TTS API (Text-to-Speech)**
+   - Model: `tts-1`
+   - Voice: `alloy` (voce naturale)
+   - Speed: `1.0` (velocità normale)
+   - Input: Testo della risposta
+   - Output: Audio `.mp3`
 
 ### Directory e File
 
 ```
 data/
 └── telegram-audio/
-    ├── voice_1234567890.ogg  (temporaneo)
-    ├── voice_1234567891.ogg  (temporaneo)
+    ├── voice_1234567890.ogg     (input utente - temporaneo)
+    ├── response_1234567891.mp3  (risposta bot - temporaneo)
     └── .gitkeep
 ```
 
-**Nota**: I file audio sono temporanei e vengono eliminati automaticamente dopo la trascrizione.
+**Nota**: I file audio sono temporanei e vengono eliminati automaticamente dopo l'uso.
 
 ## 📊 Log Dettagliati
 
-### Messaggio vocale ricevuto
+### Messaggio vocale ricevuto e risposta vocale
 
 ```
 🎤 Messaggio vocale ricevuto da @username (5s)
 ⬇️  Download audio in corso...
-✅ Audio scaricato: /path/to/voice_1234567890.ogg
+✅ Audio scaricato: voice_1234567890.ogg
 🔤 Trascrizione in corso...
 ✅ Trascrizione completata: "Vorrei una Margherita..."
 🤖 Chiamata a OpenAI (2 messaggi in sessione)...
 ✅ Risposta AI ricevuta: 1 articoli nell'ordine
-📤 Risposta inviata a @username
+🔊 Generazione audio TTS in corso...
+✅ Audio generato: response_1234567891.mp3
+🔊 Risposta vocale inviata a @username
+```
+
+### Fallback a testo (se TTS fallisce)
+
+```
+⚠️  Errore TTS, invio testo: Rate limit exceeded
+📤 Risposta testuale inviata a @username (fallback)
 ```
 
 ## 🚀 Performance
@@ -76,17 +94,29 @@ data/
 | Download audio | ~500ms |
 | Trascrizione Whisper | ~2-3s |
 | Risposta AI | ~1-2s |
-| **Totale** | **~4-6s** |
+| Generazione TTS | ~2-3s |
+| Upload risposta | ~500ms |
+| **Totale** | **~7-10s** |
 
-*Tempo totale dipende dalla durata del messaggio vocale*
+*Tempo totale dipende dalla durata dei messaggi vocali*
+
+### Confronto Testo vs Vocale
+
+| Metodo | Tempo Risposta |
+|--------|----------------|
+| Messaggio testo | ~2-3s |
+| Messaggio vocale | ~7-10s |
+
+**Nota**: La risposta vocale è più lenta ma offre un'esperienza hands-free completa!
 
 ## 💡 Vantaggi
 
-✅ **Hands-free**: Ordina mentre fai altro
-✅ **Veloce**: Più rapido che scrivere
-✅ **Naturale**: Parla come faresti al telefono
-✅ **Preciso**: Whisper ha ottima accuratezza per italiano
+✅ **Completamente Hands-free**: Ordina senza toccare il telefono
+✅ **Conversazione Naturale**: Come parlare con un cameriere
+✅ **Bidirezionale**: Parli e ascolti, senza leggere
+✅ **Preciso**: Whisper + TTS di alta qualità
 ✅ **Trasparente**: Mostra cosa ha capito
+✅ **Accessibile**: Ottimo per utenti con difficoltà visive
 
 ## 🎯 Best Practices
 
@@ -176,21 +206,36 @@ rm data/telegram-audio/voice_*.ogg
 
 ## 💰 Costi OpenAI
 
-### Whisper API Pricing
+### Tariffe API (2024)
 
-**Tariffe (2024):**
-- $0.006 per minuto audio
+| API | Costo | Unità |
+|-----|-------|-------|
+| **Whisper** (STT) | $0.006 | per minuto audio input |
+| **TTS** | $0.015 | per 1000 caratteri output |
 
-**Esempi:**
-- Messaggio 5s: ~$0.0005
-- Messaggio 15s: ~$0.0015
-- Messaggio 30s: ~$0.003
+### Esempi Costi per Conversazione
+
+**Scenario: Messaggio 10s con risposta 50 caratteri**
+- Whisper: ~$0.001
+- TTS: ~$0.0008
+- **Totale: ~$0.0018 per conversazione**
 
 **Stima mensile:**
-- 100 messaggi vocali/mese (media 10s): ~$0.10
-- 1000 messaggi vocali/mese (media 10s): ~$1.00
+- 100 conversazioni vocali/mese: ~$0.18
+- 1000 conversazioni vocali/mese: ~$1.80
 
-*Nota: Costi molto contenuti!*
+**Confronto con solo testo:**
+- Solo Whisper (no TTS): ~$1.00/1000 messaggi
+- Con Whisper + TTS: ~$1.80/1000 conversazioni
+
+*Nota: Costi molto contenuti anche con TTS!*
+
+### Ottimizzazione Costi
+
+Se vuoi ridurre i costi:
+- Mantieni risposte concise (meno caratteri TTS)
+- Usa `tts-1` invece di `tts-1-hd` (già implementato)
+- Considera fallback a testo per messaggi lunghi
 
 ## 🛠️ Configurazione Avanzata
 

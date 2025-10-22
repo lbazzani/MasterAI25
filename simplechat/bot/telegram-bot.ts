@@ -156,6 +156,28 @@ async function cleanupAudioFile(filePath: string): Promise<void> {
   }
 }
 
+// Genera audio con Text-to-Speech
+async function generateSpeech(text: string): Promise<string> {
+  const fileName = `response_${Date.now()}.mp3`;
+  const filePath = path.join(TELEGRAM_AUDIO_DIR, fileName);
+
+  console.log(`🔊 Generazione audio TTS in corso...`);
+
+  const mp3 = await openai.audio.speech.create({
+    model: 'tts-1',
+    voice: 'alloy',
+    input: text,
+    speed: 1.0,
+  });
+
+  // Converte la risposta in buffer e salva su file
+  const buffer = Buffer.from(await mp3.arrayBuffer());
+  await fs.writeFile(filePath, buffer);
+
+  console.log(`✅ Audio generato: ${filePath}`);
+  return filePath;
+}
+
 // Ottiene il path del file sessione per un utente
 function getUserSessionFile(userId: number): string {
   return path.join(TELEGRAM_SESSIONS_DIR, `user_${userId}.json`);
@@ -540,20 +562,49 @@ bot.on('voice', async (msg) => {
     // Salva la sessione
     await saveUserSession(userId, session);
 
-    // Invia risposta all'utente
+    // Prepara il testo della risposta
     let responseText = parsedResponse.message;
 
     // Se l'ordine è chiuso, aggiungi il riepilogo
     if (parsedResponse.orderClosed && session.orders.length > 0) {
       const total = session.orders.reduce((sum, item) => sum + item.prezzo, 0);
-      responseText += `\n\n✅ *ORDINE CONFERMATO!*\n\n`;
-      responseText += `📦 Totale articoli: ${session.orders.length}\n`;
-      responseText += `💰 Totale: €${total.toFixed(2)}`;
+      responseText += `\n\nOrdine confermato! Totale: ${session.orders.length} articoli per ${total.toFixed(2)} euro.`;
       console.log(`🎉 Ordine confermato per @${username}! Totale: €${total.toFixed(2)}`);
     }
 
-    bot.sendMessage(chatId, responseText, { parse_mode: 'Markdown' });
-    console.log(`📤 Risposta inviata a @${username}`);
+    // Genera audio della risposta
+    let responseAudioPath: string | null = null;
+    try {
+      responseAudioPath = await generateSpeech(responseText);
+
+      // Invia messaggio vocale
+      await bot.sendVoice(chatId, responseAudioPath);
+      console.log(`🔊 Risposta vocale inviata a @${username}`);
+
+      // Pulisci file audio dopo invio
+      await cleanupAudioFile(responseAudioPath);
+      responseAudioPath = null;
+
+    } catch (ttsError) {
+      const error = ttsError as Error;
+      console.error(`⚠️  Errore TTS, invio testo:`, error.message);
+
+      // Fallback a messaggio di testo se TTS fallisce
+      let textResponse = responseText;
+      if (parsedResponse.orderClosed && session.orders.length > 0) {
+        const total = session.orders.reduce((sum, item) => sum + item.prezzo, 0);
+        textResponse += `\n\n✅ *ORDINE CONFERMATO!*\n\n`;
+        textResponse += `📦 Totale articoli: ${session.orders.length}\n`;
+        textResponse += `💰 Totale: €${total.toFixed(2)}`;
+      }
+      bot.sendMessage(chatId, textResponse, { parse_mode: 'Markdown' });
+      console.log(`📤 Risposta testuale inviata a @${username} (fallback)`);
+
+      // Pulisci file se generato
+      if (responseAudioPath) {
+        await cleanupAudioFile(responseAudioPath);
+      }
+    }
 
   } catch (error: any) {
     console.error(`\n❌ ERRORE trascrizione per @${username}:`, error.message);
