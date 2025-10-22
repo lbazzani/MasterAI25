@@ -39,11 +39,18 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/dist
 
-<<<<<<< HEAD
-# data folder - ignore everything except system-prompt.txt
-/data/*
-!/data/system-prompt.txt
-=======
+# data folder - ignore generated files
 /data/messages.json
->>>>>>> refs/remotes/origin/main
+/data/ordine.json
+/data/telegram-messages.json
+/data/telegram-ordini.json
+
+# Telegram sessions - ignore all user session files
+/data/telegram-sessions/*
+!/data/telegram-sessions/.gitkeep
+
+# Keep these files
+!/data/system-prompt.txt
+!/data/menu.json

@@ -1,0 +1,248 @@
+{
+  "menu": {
+    "pizze": [
+      {
+        "nome": "Margherita",
+        "descrizione": "Pomodoro, mozzarella fior di latte, basilico fresco e olio extravergine d'oliva.",
+        "prezzo": 7.0,
+        "allergeni": ["glutine", "latte"]
+      },
+      {
+        "nome": "Marinara",
+        "descrizione": "Pomodoro, aglio, origano e olio extravergine d'oliva.",
+        "prezzo": 6.0,
+        "allergeni": ["glutine"]
+      },
+      {
+        "nome": "Diavola",
+        "descrizione": "Pomodoro, mozzarella, salame piccante e olio al peperoncino.",
+        "prezzo": 8.5,
+        "allergeni": ["glutine", "latte"]
+      },
+      {
+        "nome": "Quattro Stagioni",
+        "descrizione": "Pomodoro, mozzarella, prosciutto cotto, carciofi, funghi e olive nere.",
+        "prezzo": 9.0,
+        "allergeni": ["glutine", "latte"]
+      },
+      {
+        "nome": "Capricciosa",
+        "descrizione": "Pomodoro, mozzarella, prosciutto cotto, carciofi, olive e uovo sodo.",
+        "prezzo": 9.0,
+        "allergeni": ["glutine", "latte", "uova"]
+      },
+      {
+        "nome": "Quattro Formaggi",
+        "descrizione": "Mozzarella, gorgonzola, fontina e parmigiano.",
+        "prezzo": 9.5,
+        "allergeni": ["glutine", "latte"]
+      },
+      {
+        "nome": "Prosciutto e Funghi",
+        "descrizione": "Pomodoro, mozzarella, prosciutto cotto e funghi champignon.",
+        "prezzo": 8.5,
+        "allergeni": ["glutine", "latte"]
+      },
+      {
+        "nome": "Napoli",
+        "descrizione": "Pomodoro, mozzarella, acciughe e origano.",
+        "prezzo": 8.0,
+        "allergeni": ["glutine", "latte", "pesce"]
+      },
+      {
+        "nome": "Ortolana",
+        "descrizione": "Pomodoro, mozzarella, zucchine, melanzane e peperoni grigliati.",
+        "prezzo": 8.0,
+        "allergeni": ["glutine", "latte"]
+      },
+      {
+        "nome": "Bufalina",
+        "descrizione": "Pomodoro, mozzarella di bufala DOP, pomodorini e basilico fresco.",
+        "prezzo": 10.0,
+        "allergeni": ["glutine", "latte"]
+      },
+      {
+        "nome": "Boscaiola",
+        "descrizione": "Mozzarella, salsiccia e funghi porcini.",
+        "prezzo": 9.5,
+        "allergeni": ["glutine", "latte"]
+      },
+      {
+        "nome": "Tonno e Cipolla",
+        "descrizione": "Pomodoro, mozzarella, tonno e cipolla rossa.",
+        "prezzo": 8.5,
+        "allergeni": ["glutine", "latte", "pesce"]
+      },
+      {
+        "nome": "Speck e Brie",
+        "descrizione": "Mozzarella, speck dell’Alto Adige e formaggio brie.",
+        "prezzo": 9.5,
+        "allergeni": ["glutine", "latte"]
+      },
+      {
+        "nome": "Crudo e Rucola",
+        "descrizione": "Mozzarella, prosciutto crudo, rucola e scaglie di grana.",
+        "prezzo": 9.5,
+        "allergeni": ["glutine", "latte"]
+      },
+      {
+        "nome": "Pugliese",
+        "descrizione": "Pomodoro, mozzarella, cipolla, origano e olive nere.",
+        "prezzo": 8.0,
+        "allergeni": ["glutine", "latte"]
+      },
+      {
+        "nome": "Calzone Classico",
+        "descrizione": "Ripieno con pomodoro, mozzarella e prosciutto cotto.",
+        "prezzo": 9.0,
+        "allergeni": ["glutine", "latte"]
+      },
+      {
+        "nome": "Salsiccia e Friarielli",
+        "descrizione": "Mozzarella, salsiccia e friarielli napoletani.",
+        "prezzo": 9.0,
+        "allergeni": ["glutine", "latte"]
+      },
+      {
+        "nome": "Tartufo e Funghi",
+        "descrizione": "Mozzarella, crema al tartufo e funghi porcini.",
+        "prezzo": 11.0,
+        "allergeni": ["glutine", "latte"]
+      },
+      {
+        "nome": "Carbonara",
+        "descrizione": "Mozzarella, guanciale, uovo e pecorino romano.",
+        "prezzo": 10.0,
+        "allergeni": ["glutine", "latte", "uova"]
+      },
+      {
+        "nome": "Vegetariana Integrale",
+        "descrizione": "Impasto integrale con verdure miste di stagione e mozzarella light.",
+        "prezzo": 9.0,
+        "allergeni": ["glutine", "latte"]
+      }
+    ],
+    "bevande": [
+      {
+        "nome": "Acqua Naturale 0.5L",
+        "descrizione": "Acqua minerale naturale.",
+        "prezzo": 1.5,
+        "allergeni": []
+      },
+      {
+        "nome": "Acqua Frizzante 0.5L",
+        "descrizione": "Acqua minerale frizzante.",
+        "prezzo": 1.5,
+        "allergeni": []
+      },
+      {
+        "nome": "Coca-Cola",
+        "descrizione": "Bibita analcolica al gusto cola.",
+        "prezzo": 3.0,
+        "allergeni": []
+      },
+      {
+        "nome": "Coca-Cola Zero",
+        "descrizione": "Bibita analcolica senza zucchero.",
+        "prezzo": 3.0,
+        "allergeni": []
+      },
+      {
+        "nome": "Fanta",
+        "descrizione": "Bibita analcolica all’arancia.",
+        "prezzo": 3.0,
+        "allergeni": []
+      },
+      {
+        "nome": "Sprite",
+        "descrizione": "Bibita analcolica al limone.",
+        "prezzo": 3.0,
+        "allergeni": []
+      },
+      {
+        "nome": "Birra Bionda 33cl",
+        "descrizione": "Birra chiara artigianale.",
+        "prezzo": 4.0,
+        "allergeni": ["glutine"]
+      },
+      {
+        "nome": "Birra Rossa 33cl",
+        "descrizione": "Birra rossa doppio malto.",
+        "prezzo": 4.5,
+        "allergeni": ["glutine"]
+      },
+      {
+        "nome": "Birra Weiss 50cl",
+        "descrizione": "Birra di frumento dal gusto aromatico.",
+        "prezzo": 5.0,
+        "allergeni": ["glutine"]
+      },
+      {
+        "nome": "Birra Senza Glutine",
+        "descrizione": "Birra chiara gluten-free.",
+        "prezzo": 4.5,
+        "allergeni": []
+      },
+      {
+        "nome": "Vino Bianco della Casa",
+        "descrizione": "Vino bianco secco locale.",
+        "prezzo": 3.5,
+        "allergeni": ["solfiti"]
+      },
+      {
+        "nome": "Vino Rosso della Casa",
+        "descrizione": "Vino rosso corposo delle colline.",
+        "prezzo": 3.5,
+        "allergeni": ["solfiti"]
+      },
+      {
+        "nome": "Prosecco DOC",
+        "descrizione": "Vino spumante veneto.",
+        "prezzo": 5.0,
+        "allergeni": ["solfiti"]
+      },
+      {
+        "nome": "Limoncello",
+        "descrizione": "Liquore dolce al limone, servito freddo.",
+        "prezzo": 3.0,
+        "allergeni": []
+      },
+      {
+        "nome": "Amaro del Capo",
+        "descrizione": "Liquore alle erbe calabrese.",
+        "prezzo": 3.0,
+        "allergeni": []
+      },
+      {
+        "nome": "Caffè Espresso",
+        "descrizione": "Caffè espresso 100% arabica.",
+        "prezzo": 1.5,
+        "allergeni": []
+      },
+      {
+        "nome": "Caffè Decaffeinato",
+        "descrizione": "Espresso senza caffeina.",
+        "prezzo": 1.5,
+        "allergeni": []
+      },
+      {
+        "nome": "Cappuccino",
+        "descrizione": "Espresso con latte caldo montato.",
+        "prezzo": 2.0,
+        "allergeni": ["latte"]
+      },
+      {
+        "nome": "Tè Freddo al Limone",
+        "descrizione": "Bevanda analcolica al gusto di tè e limone.",
+        "prezzo": 3.0,
+        "allergeni": []
+      },
+      {
+        "nome": "Tè Freddo alla Pesca",
+        "descrizione": "Bevanda analcolica al gusto di tè e pesca.",
+        "prezzo": 3.0,
+        "allergeni": []
+      }
+    ]
+  }
+}

@@ -6,14 +6,19 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "bot:build": "tsc -p tsconfig.bot.json",
+    "bot": "npm run bot:build && node dist/bot/telegram-bot.js",
+    "bot:dev": "tsx watch bot/telegram-bot.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.4",
     "@mui/material": "^7.3.4",
+    "dotenv": "^16.6.1",
     "next": "15.5.5",
+    "node-telegram-bot-api": "^0.66.0",
     "openai": "^6.3.0",
     "react": "19.1.0",
     "react-dom": "19.1.0"
@@ -22,11 +27,13 @@
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/node-telegram-bot-api": "^0.64.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.5",
     "tailwindcss": "^4",
+    "tsx": "^4.19.2",
     "typescript": "^5"
   }
 }
