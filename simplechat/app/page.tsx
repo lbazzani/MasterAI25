@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   Box,
   TextField,
@@ -28,20 +28,31 @@ const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#616161',
+      main: '#4a5568',
     },
     secondary: {
-      main: '#9e9e9e',
+      main: '#718096',
     },
     background: {
       default: '#f5f5f5',
       paper: '#ffffff',
     },
     text: {
-      primary: '#212121',
-      secondary: '#757575',
+      primary: '#2d3748',
+      secondary: '#718096',
     },
   },
+  shape: {
+    borderRadius: 12,
+  },
+  shadows: [
+    'none',
+    '0 2px 4px rgba(0,0,0,0.05)',
+    '0 4px 6px rgba(0,0,0,0.07)',
+    '0 10px 15px rgba(0,0,0,0.1)',
+    '0 20px 25px rgba(0,0,0,0.15)',
+    ...Array(20).fill('0 25px 50px rgba(0,0,0,0.25)'),
+  ] as any,
 });
 
 interface Message {
@@ -66,6 +77,12 @@ export default function Home() {
   const [menuData, setMenuData] = useState<MenuItem[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll quando cambiano i messaggi o il loading
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, loading]);
 
   // Carica i messaggi all'avvio
   useEffect(() => {
@@ -184,49 +201,62 @@ export default function Home() {
       <Box
         sx={{
           minHeight: '100vh',
-          backgroundColor: '#e0e0e0',
+          background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          p: 2,
-          gap: 2,
+          p: 3,
+          gap: 3,
         }}
       >
         {/* Colonna sinistra - Chat */}
         <Container maxWidth="md" sx={{ flex: 1, maxWidth: '600px !important' }}>
           <Paper
-            elevation={3}
+            elevation={4}
             sx={{
               height: '85vh',
               display: 'flex',
               flexDirection: 'column',
-              backgroundColor: '#fafafa',
+              backgroundColor: '#ffffff',
+              borderRadius: 3,
+              overflow: 'hidden',
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              '&:hover': {
+                transform: 'translateY(-4px)',
+                boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
+              },
             }}
           >
             <Box
               sx={{
-                p: 2,
-                borderBottom: '1px solid #bdbdbd',
-                backgroundColor: '#616161',
+                p: 3,
+                backgroundColor: '#2d3748',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
               }}
             >
-              <Typography variant="h5" sx={{ color: '#ffffff' }}>
-                SimpleChat - Menu Creator
+              <Typography variant="h5" sx={{ color: '#ffffff', fontWeight: 600 }}>
+                🍕 SimpleChat - Menu Creator
               </Typography>
               <Box>
                 <IconButton
                   onClick={loadMessages}
-                  sx={{ color: '#ffffff', mr: 1 }}
+                  sx={{
+                    color: '#ffffff',
+                    mr: 1,
+                    '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' }
+                  }}
                   title="Ricarica messaggi"
                 >
                   <RefreshIcon />
                 </IconButton>
                 <IconButton
                   onClick={clearMessages}
-                  sx={{ color: '#ffffff' }}
+                  sx={{
+                    color: '#ffffff',
+                    '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' }
+                  }}
                   title="Cancella tutto"
                 >
                   <DeleteIcon />
@@ -238,10 +268,11 @@ export default function Home() {
               sx={{
                 flex: 1,
                 overflowY: 'auto',
-                p: 2,
+                p: 3,
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 2,
+                backgroundColor: '#f7fafc',
               }}
             >
               {messages.length === 0 && (
@@ -270,11 +301,14 @@ export default function Home() {
                       }}
                     >
                       <Paper
+                        elevation={1}
                         sx={{
-                          p: 2,
+                          p: 2.5,
                           maxWidth: '70%',
-                          backgroundColor: '#757575',
+                          backgroundColor: '#4a5568',
                           color: '#ffffff',
+                          borderRadius: 3,
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                         }}
                       >
                         <Typography variant="body1" sx={{ whiteSpace: 'pre-wrap' }}>
@@ -294,11 +328,15 @@ export default function Home() {
                       }}
                     >
                       <Paper
+                        elevation={1}
                         sx={{
-                          p: 2,
+                          p: 2.5,
                           maxWidth: '70%',
-                          backgroundColor: '#e0e0e0',
-                          color: '#212121',
+                          backgroundColor: '#ffffff',
+                          color: '#2d3748',
+                          borderRadius: 3,
+                          border: '1px solid #e2e8f0',
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
                         }}
                       >
                         <Typography variant="body1" sx={{ whiteSpace: 'pre-wrap' }}>
@@ -312,21 +350,32 @@ export default function Home() {
 
               {loading && (
                 <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-                  <Paper sx={{ p: 2, backgroundColor: '#e0e0e0' }}>
-                    <CircularProgress size={24} sx={{ color: '#616161' }} />
+                  <Paper
+                    elevation={1}
+                    sx={{
+                      p: 2.5,
+                      backgroundColor: '#ffffff',
+                      borderRadius: 3,
+                      border: '1px solid #e2e8f0',
+                    }}
+                  >
+                    <CircularProgress size={24} sx={{ color: '#4a5568' }} />
                   </Paper>
                 </Box>
               )}
+
+              {/* Elemento invisibile per auto-scroll */}
+              <div ref={messagesEndRef} />
             </Box>
 
             <Box
               sx={{
-                p: 2,
-                borderTop: '1px solid #bdbdbd',
+                p: 3,
+                borderTop: '1px solid #e2e8f0',
                 backgroundColor: '#ffffff',
               }}
             >
-              <Box sx={{ display: 'flex', gap: 1 }}>
+              <Box sx={{ display: 'flex', gap: 2 }}>
                 <TextField
                   fullWidth
                   multiline
@@ -334,12 +383,19 @@ export default function Home() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Es: Crea un menu per un ristorante italiano..."
+                  placeholder="Es: Vorrei ordinare una Margherita..."
                   disabled={loading}
                   variant="outlined"
                   sx={{
                     '& .MuiOutlinedInput-root': {
-                      backgroundColor: '#fafafa',
+                      backgroundColor: '#f7fafc',
+                      borderRadius: 2,
+                      '&:hover fieldset': {
+                        borderColor: '#4a5568',
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#4a5568',
+                      },
                     },
                   }}
                 />
@@ -349,9 +405,13 @@ export default function Home() {
                   disabled={loading || !input.trim()}
                   sx={{
                     minWidth: '60px',
-                    backgroundColor: '#616161',
+                    backgroundColor: '#4a5568',
+                    borderRadius: 2,
                     '&:hover': {
-                      backgroundColor: '#424242',
+                      backgroundColor: '#2d3748',
+                    },
+                    '&:disabled': {
+                      backgroundColor: '#cbd5e0',
                     },
                   }}
                 >
@@ -365,23 +425,29 @@ export default function Home() {
         {/* Colonna destra - Preventivo Menu */}
         <Container maxWidth="sm" sx={{ flex: 1, maxWidth: '500px !important' }}>
           <Paper
-            elevation={3}
+            elevation={4}
             sx={{
               height: '85vh',
               display: 'flex',
               flexDirection: 'column',
-              backgroundColor: '#fafafa',
+              backgroundColor: '#ffffff',
+              borderRadius: 3,
+              overflow: 'hidden',
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              '&:hover': {
+                transform: 'translateY(-4px)',
+                boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
+              },
             }}
           >
             <Box
               sx={{
-                p: 2,
-                borderBottom: '1px solid #bdbdbd',
-                backgroundColor: '#757575',
+                p: 3,
+                backgroundColor: '#2d3748',
               }}
             >
-              <Typography variant="h5" sx={{ color: '#ffffff' }}>
-                Preventivo Menu
+              <Typography variant="h5" sx={{ color: '#ffffff', fontWeight: 600 }}>
+                📋 Ordinazioni
               </Typography>
             </Box>
 
@@ -389,7 +455,8 @@ export default function Home() {
               sx={{
                 flex: 1,
                 overflowY: 'auto',
-                p: 2,
+                p: 3,
+                backgroundColor: '#f7fafc',
               }}
             >
               {menuData.length === 0 ? (
@@ -402,16 +469,16 @@ export default function Home() {
                   }}
                 >
                   <Typography variant="body1" color="text.secondary">
-                    Nessun piatto nel menu
+                    Nessuna ordinazione ancora
                   </Typography>
                 </Box>
               ) : (
                 <TableContainer>
                   <Table size="small">
                     <TableHead>
-                      <TableRow sx={{ backgroundColor: '#e0e0e0' }}>
-                        <TableCell sx={{ fontWeight: 'bold' }}>Piatto</TableCell>
-                        <TableCell sx={{ fontWeight: 'bold' }}>Categoria</TableCell>
+                      <TableRow sx={{ backgroundColor: '#e2e8f0' }}>
+                        <TableCell sx={{ fontWeight: 'bold', color: '#2d3748' }}>Piatto</TableCell>
+                        <TableCell sx={{ fontWeight: 'bold', color: '#2d3748' }}>Categoria</TableCell>
                         <TableCell align="right" sx={{ fontWeight: 'bold' }}>
                           Prezzo
                         </TableCell>
@@ -422,12 +489,13 @@ export default function Home() {
                         <TableRow
                           key={index}
                           sx={{
-                            '&:nth-of-type(odd)': { backgroundColor: '#fafafa' },
-                            '&:nth-of-type(even)': { backgroundColor: '#f5f5f5' },
+                            '&:nth-of-type(odd)': { backgroundColor: '#ffffff' },
+                            '&:nth-of-type(even)': { backgroundColor: '#f7fafc' },
+                            '&:hover': { backgroundColor: '#edf2f7' },
                           }}
                         >
                           <TableCell>
-                            <Typography variant="body2" fontWeight="500">
+                            <Typography variant="body2" fontWeight="500" color="#2d3748">
                               {item.nome}
                             </Typography>
                             <Typography variant="caption" color="text.secondary">
@@ -435,12 +503,12 @@ export default function Home() {
                             </Typography>
                           </TableCell>
                           <TableCell>
-                            <Typography variant="body2" sx={{ textTransform: 'capitalize' }}>
+                            <Typography variant="body2" sx={{ textTransform: 'capitalize', color: '#4a5568' }}>
                               {item.categoria}
                             </Typography>
                           </TableCell>
                           <TableCell align="right">
-                            <Typography variant="body2" fontWeight="500">
+                            <Typography variant="body2" fontWeight="600" color="#2d3748">
                               €{item.prezzo.toFixed(2)}
                             </Typography>
                           </TableCell>
@@ -455,16 +523,16 @@ export default function Home() {
             {menuData.length > 0 && (
               <Box
                 sx={{
-                  p: 2,
-                  borderTop: '2px solid #616161',
-                  backgroundColor: '#e0e0e0',
+                  p: 3,
+                  borderTop: '2px solid #e2e8f0',
+                  backgroundColor: '#2d3748',
                 }}
               >
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <Typography variant="h6" fontWeight="bold">
+                  <Typography variant="h6" fontWeight="bold" color="#ffffff">
                     Totale Piatti: {menuData.length}
                   </Typography>
-                  <Typography variant="h6" fontWeight="bold">
+                  <Typography variant="h6" fontWeight="bold" color="#ffffff">
                     €{calculateTotal()}
                   </Typography>
                 </Box>

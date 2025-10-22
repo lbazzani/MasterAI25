@@ -10,7 +10,8 @@ const openai = new OpenAI({
 const DATA_DIR = path.join(process.cwd(), 'data');
 const MESSAGES_FILE = path.join(DATA_DIR, 'messages.json');
 const SYSTEM_PROMPT_FILE = path.join(DATA_DIR, 'system-prompt.txt');
-const MENU_DATA_FILE = path.join(DATA_DIR, 'menu-data.json');
+const MENU_DATA_FILE = path.join(DATA_DIR, 'ordine.json');
+const MENU_PRODUCTS_FILE = path.join(DATA_DIR, 'menu.json');
 
 interface Message {
   role: 'system' | 'user' | 'assistant';
@@ -27,6 +28,20 @@ interface MenuItem {
 interface AIResponse {
   data: MenuItem[];
   message: string;
+}
+
+interface MenuProduct {
+  nome: string;
+  descrizione: string;
+  prezzo: number;
+  allergeni: string[];
+}
+
+interface MenuStructure {
+  menu: {
+    pizze: MenuProduct[];
+    bevande: MenuProduct[];
+  };
 }
 
 async function readMessages(): Promise<Message[]> {
@@ -47,6 +62,15 @@ async function readSystemPrompt(): Promise<string> {
     return await fs.readFile(SYSTEM_PROMPT_FILE, 'utf-8');
   } catch (error) {
     return 'Sei un assistente AI utile e cordiale.';
+  }
+}
+
+async function readMenuProducts(): Promise<MenuStructure> {
+  try {
+    const data = await fs.readFile(MENU_PRODUCTS_FILE, 'utf-8');
+    return JSON.parse(data);
+  } catch (error) {
+    return { menu: { pizze: [], bevande: [] } };
   }
 }
 
@@ -86,6 +110,7 @@ export async function POST(req: NextRequest) {
     const messages = await readMessages();
     const systemPrompt = await readSystemPrompt();
     const currentMenuData = await readMenuData();
+    const menuProducts = await readMenuProducts();
 
     // Aggiungi il messaggio dell'utente
     const userMessage: Message = {
@@ -94,16 +119,21 @@ export async function POST(req: NextRequest) {
     };
     messages.push(userMessage);
 
-    // Prepara il prompt con il contesto del menu esistente
+    // Prepara il prompt con il contesto del menu disponibile
     let enhancedSystemPrompt = systemPrompt;
+
+    // Aggiungi sempre i prodotti disponibili dal menu.json
+    enhancedSystemPrompt += `\n\n${JSON.stringify(menuProducts, null, 2)}`;
+
+    // Aggiungi anche le ordinazioni correnti se presenti
     if (currentMenuData.length > 0) {
-      enhancedSystemPrompt += `\n\nMENU CORRENTE:\n${JSON.stringify(currentMenuData, null, 2)}\n\nQuando rispondi, includi sempre tutti i piatti del menu corrente nell'array "data", anche se non modificati.`;
+      enhancedSystemPrompt += `\n\nORDINAZIONI CORRENTI:\n${JSON.stringify(currentMenuData, null, 2)}\n\nQuando rispondi, includi sempre tutti i piatti ordinati nell'array "data", anche se non modificati.`;
     }
 
     // Prepara i messaggi per OpenAI (con system prompt)
     const openAIMessages = [
       { role: 'system' as const, content: enhancedSystemPrompt },
-      ...messages.slice(-5),
+      ...messages,
     ];
 
     // Chiama OpenAI con response_format json_object
