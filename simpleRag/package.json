@@ -1,0 +1,29 @@
+{
+  "name": "simple-rag",
+  "version": "1.0.0",
+  "description": "Sistema RAG semplice per interrogare PDF usando Qdrant e OpenAI",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "upload": "tsx src/upload-pdfs.ts",
+    "query": "tsx src/query.ts",
+    "dev:upload": "tsx watch src/upload-pdfs.ts",
+    "dev:query": "tsx watch src/query.ts"
+  },
+  "keywords": ["rag", "pdf", "qdrant", "openai", "embeddings"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@qdrant/js-client-rest": "^1.11.0",
+    "openai": "^4.73.0",
+    "pdf-parse": "^1.1.1",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/pdf-parse": "^1.1.4",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

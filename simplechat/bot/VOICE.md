@@ -187,6 +187,7 @@ data/
 **Soluzione manuale:**
 ```bash
 rm data/telegram-audio/voice_*.ogg
+rm data/telegram-audio/response_*.mp3
 ```
 
 ## 🔐 Privacy e Sicurezza
@@ -294,10 +295,62 @@ grep "ERRORE trascrizione" bot.log
 |---------|-------|--------|
 | Velocità input | Medio | Veloce |
 | Accuratezza | 100% | ~95% |
-| Tempo risposta | ~2s | ~4-6s |
+| Tempo risposta | ~2s | ~7-10s |
 | Hands-free | ❌ | ✅ |
-| Costo | Gratis | $0.0006/msg |
+| Costo | Gratis | $0.0018/msg |
 | Privacy | Massima | Alta |
+
+## 🛠️ Personalizzazione Voce TTS
+
+### Cambiare Voce
+
+OpenAI TTS offre diverse voci tra cui scegliere. Modifica in `telegram-bot.ts`:
+
+```typescript
+const mp3 = await openai.audio.speech.create({
+  model: 'tts-1',
+  voice: 'nova', // Opzioni: alloy, echo, fable, onyx, nova, shimmer
+  input: text,
+  speed: 1.0,
+});
+```
+
+**Caratteristiche voci:**
+- `alloy` - Voce neutra, chiara (default)
+- `echo` - Voce maschile, profonda
+- `fable` - Voce british, espressiva
+- `onyx` - Voce maschile, forte
+- `nova` - Voce femminile, energica
+- `shimmer` - Voce femminile, morbida
+
+### Velocità Parlato
+
+Regola la velocità da 0.25x a 4.0x:
+
+```typescript
+const mp3 = await openai.audio.speech.create({
+  model: 'tts-1',
+  voice: 'alloy',
+  input: text,
+  speed: 1.2, // 20% più veloce
+});
+```
+
+### Qualità Audio
+
+Per audio di qualità superiore:
+
+```typescript
+const mp3 = await openai.audio.speech.create({
+  model: 'tts-1-hd', // Qualità maggiore, latenza maggiore
+  voice: 'alloy',
+  input: text,
+});
+```
+
+**Confronto modelli:**
+- `tts-1`: Veloce, ottima qualità, latenza ~2s
+- `tts-1-hd`: Lento, qualità superiore, latenza ~4s
 
 ## 🚀 Future Improvements
 
@@ -306,13 +359,15 @@ Possibili migliorie:
 - [ ] Supporto audio notes (oltre voice messages)
 - [ ] Trascrizione real-time (streaming)
 - [ ] Rilevamento automatico lingua
-- [ ] Risposta vocale (Text-to-Speech)
+- [x] Risposta vocale (Text-to-Speech) ✅ IMPLEMENTATO
 - [ ] Compressione audio prima upload
 - [ ] Cache trascrizioni comuni
+- [ ] Selezione voce TTS personalizzata per utente
 
 ## 📚 Risorse
 
 - [OpenAI Whisper API Docs](https://platform.openai.com/docs/guides/speech-to-text)
+- [OpenAI TTS API Docs](https://platform.openai.com/docs/guides/text-to-speech)
 - [Telegram Voice Messages](https://core.telegram.org/bots/api#voice)
 - [Whisper Model Info](https://openai.com/research/whisper)
 
