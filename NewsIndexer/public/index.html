@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <title>News Indexer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
+    header {
+      background: #1f2937;
+      color: #fff;
+      padding: 1.5rem 2rem;
+    }
+    main {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+    h1, h2 {
+      margin: 0 0 1rem;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    select, textarea, button {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+    }
+    button {
+      cursor: pointer;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+    button:hover {
+      background: #1d4ed8;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+    }
+    li {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0.75rem 0;
+    }
+    li:last-child {
+      border-bottom: none;
+    }
+    .article-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 0;
+      color: #1f2937;
+    }
+    .article-meta {
+      font-size: 0.9rem;
+      color: #6b7280;
+      margin: 0.25rem 0;
+    }
+    .article-desc {
+      font-size: 0.95rem;
+      margin: 0.4rem 0 0;
+      color: #374151;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      background: #e0f2fe;
+      color: #0369a1;
+      border-radius: 999px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.75rem;
+      margin-right: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+    .status {
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: #2563eb;
+    }
+    .error {
+      color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>News Indexer</h1>
+    <p>Esplora le categorie e trova articoli simili con la ricerca semantica.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Filtra per categoria</h2>
+      <div class="status" id="category-status">Caricamento categorie…</div>
+      <label for="primary-select">Categoria principale</label>
+      <select id="primary-select" disabled>
+        <option value="">Tutte</option>
+      </select>
+
+      <label for="secondary-select">Categoria secondaria</label>
+      <select id="secondary-select" disabled>
+        <option value="">Tutte</option>
+      </select>
+
+      <button id="filter-button" disabled>Visualizza articoli</button>
+      <ul id="articles-list"></ul>
+    </section>
+
+    <section>
+      <h2>Ricerca semantica</h2>
+      <p>Inserisci un articolo (titolo + testo) per trovare notizie simili.</p>
+      <textarea id="query-text" rows="12" placeholder="Scrivi qui il testo dell'articolo…"></textarea>
+      <button id="search-button">Cerca articoli simili</button>
+      <div class="status" id="search-status"></div>
+      <ul id="search-results"></ul>
+    </section>
+
+    <section>
+      <h2>Chat con il dataset</h2>
+      <p>Fai una domanda in linguaggio naturale, la risposta verrà generata usando solo le notizie indicizzate.</p>
+      <textarea id="chat-input" rows="6" placeholder="Chiedi qualcosa sulle notizie…"></textarea>
+      <button id="chat-button">Invia domanda</button>
+      <div class="status" id="chat-status"></div>
+      <div id="chat-response"></div>
+    </section>
+  </main>
+
+  <script>
+    const primarySelect = document.getElementById('primary-select');
+    const secondarySelect = document.getElementById('secondary-select');
+    const filterButton = document.getElementById('filter-button');
+    const categoryStatus = document.getElementById('category-status');
+    const articlesList = document.getElementById('articles-list');
+    const searchButton = document.getElementById('search-button');
+    const searchStatus = document.getElementById('search-status');
+    const searchResults = document.getElementById('search-results');
+    const queryText = document.getElementById('query-text');
+    const chatInput = document.getElementById('chat-input');
+    const chatButton = document.getElementById('chat-button');
+    const chatStatus = document.getElementById('chat-status');
+    const chatResponse = document.getElementById('chat-response');
+
+    let categoriesData = [];
+
+    async function loadCategories() {
+      try {
+        const res = await fetch('/categories');
+        if (!res.ok) {
+          throw new Error('Impossibile recuperare le categorie');
+        }
+        const data = await res.json();
+        categoriesData = data.categories || [];
+
+        primarySelect.innerHTML = '<option value="">Tutte</option>';
+        for (const cat of categoriesData) {
+          const option = document.createElement('option');
+          option.value = cat.primary;
+          option.textContent = `${cat.primary} (${cat.count})`;
+          primarySelect.appendChild(option);
+        }
+
+        categoryStatus.textContent = 'Categorie pronte.';
+        categoryStatus.classList.remove('error');
+        primarySelect.disabled = false;
+        secondarySelect.disabled = false;
+        filterButton.disabled = false;
+      } catch (error) {
+        categoryStatus.textContent = error.message;
+        categoryStatus.classList.add('error');
+      }
+    }
+
+    function updateSecondaryOptions() {
+      const primary = primarySelect.value;
+      secondarySelect.innerHTML = '<option value="">Tutte</option>';
+      if (!primary) {
+        return;
+      }
+      const selected = categoriesData.find((cat) => cat.primary === primary);
+      if (!selected) return;
+      for (const sec of selected.secondary) {
+        const option = document.createElement('option');
+        option.value = sec.name;
+        option.textContent = `${sec.name} (${sec.count})`;
+        secondarySelect.appendChild(option);
+      }
+    }
+
+    function renderArticles(listEl, articles) {
+      listEl.innerHTML = '';
+      if (!articles.length) {
+        const li = document.createElement('li');
+        li.textContent = 'Nessun articolo trovato.';
+        listEl.appendChild(li);
+        return;
+      }
+
+      for (const art of articles) {
+        const li = document.createElement('li');
+
+        const title = document.createElement('p');
+        title.className = 'article-title';
+        if (art.site_link) {
+          const link = document.createElement('a');
+          link.href = art.site_link;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = art.title || art.id;
+          title.appendChild(link);
+        } else {
+          title.textContent = art.title || art.id;
+        }
+
+        const meta = document.createElement('p');
+        meta.className = 'article-meta';
+        meta.textContent = [
+          art.domain || null,
+          art.postdate ? new Date(art.postdate).toLocaleDateString('it-IT') : null
+        ].filter(Boolean).join(' · ');
+
+        const desc = document.createElement('p');
+        desc.className = 'article-desc';
+        desc.textContent = art.description || art.summary || art.snippet || '—';
+
+        const tagsWrapper = document.createElement('div');
+        for (const cat of art.categories || []) {
+          const span = document.createElement('span');
+          span.className = 'tag';
+          span.textContent = cat;
+          tagsWrapper.appendChild(span);
+        }
+
+        li.appendChild(title);
+        if (meta.textContent) li.appendChild(meta);
+
+        if (typeof art.score === 'number') {
+          const score = document.createElement('p');
+          score.className = 'article-meta';
+          score.textContent = `Similarità: ${(art.score * 100).toFixed(1)}%`;
+          li.appendChild(score);
+        }
+
+        li.appendChild(desc);
+        li.appendChild(tagsWrapper);
+        listEl.appendChild(li);
+      }
+    }
+
+    async function fetchArticles() {
+      const primary = primarySelect.value;
+      const secondary = secondarySelect.value;
+      if (!primary) {
+        categoryStatus.textContent = 'Seleziona una categoria principale.';
+        categoryStatus.classList.add('error');
+        renderArticles(articlesList, []);
+        return;
+      }
+
+      const params = new URLSearchParams();
+      params.append('primary', primary);
+      if (secondary) params.append('secondary', secondary);
+
+      categoryStatus.textContent = 'Cerco articoli…';
+      categoryStatus.classList.remove('error');
+
+      try {
+        const res = await fetch(`/articles?${params.toString()}`);
+        if (!res.ok) throw new Error('Errore durante il recupero degli articoli');
+        const data = await res.json();
+        renderArticles(articlesList, data.articles || []);
+        categoryStatus.classList.remove('error');
+        categoryStatus.textContent = `Trovati ${data.articles.length} articoli.`;
+      } catch (error) {
+        categoryStatus.textContent = error.message;
+        categoryStatus.classList.add('error');
+        renderArticles(articlesList, []);
+      }
+    }
+
+    async function searchSimilar() {
+      const text = queryText.value.trim();
+      if (!text) {
+        searchStatus.textContent = 'Inserisci del testo da cercare.';
+        searchStatus.classList.add('error');
+        return;
+      }
+
+      searchStatus.textContent = 'Ricerca in corso…';
+      searchStatus.classList.remove('error');
+      searchResults.innerHTML = '';
+
+      try {
+        const res = await fetch('/search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text, topK: 10 })
+        });
+        if (!res.ok) throw new Error('Errore durante la ricerca');
+        const data = await res.json();
+        const matches = (data.matches || []).map((m) => ({
+          id: m.id,
+          title: m.metadata?.title || m.id,
+          description: m.metadata?.description || '',
+          site_link: m.metadata?.site_link,
+          categories: m.metadata?.categories || [],
+          domain: m.metadata?.domain || '',
+          postdate: m.metadata?.postdate || null,
+          score: m.score || 0
+        }));
+
+        renderArticles(searchResults, matches);
+        searchStatus.textContent = `Trovati ${matches.length} articoli simili.`;
+      } catch (error) {
+        searchStatus.textContent = error.message;
+        searchStatus.classList.add('error');
+        renderArticles(searchResults, []);
+      }
+    }
+
+    async function askChat() {
+      const prompt = chatInput.value.trim();
+      if (!prompt) {
+        chatStatus.textContent = 'Scrivi una domanda per avviare la chat.';
+        chatStatus.classList.add('error');
+        chatResponse.innerHTML = '';
+        return;
+      }
+
+      chatStatus.textContent = 'Sto cercando le notizie rilevanti…';
+      chatStatus.classList.remove('error');
+      chatResponse.innerHTML = '';
+
+      try {
+        const res = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt })
+        });
+        if (!res.ok) throw new Error('Errore durante la generazione della risposta');
+        const data = await res.json();
+        chatStatus.textContent = 'Risposta generata.';
+        chatResponse.innerHTML = `
+          <p>${data.answer.replace(/\n/g, '<br/>')}</p>
+          <h4>Fonti</h4>
+          <ul>
+            ${(data.sources || []).map(src => `
+              <li>
+                <strong>${src.metadata?.title || src.id}</strong>
+                ${src.metadata?.site_link ? `<a href="${src.metadata.site_link}" target="_blank" rel="noopener noreferrer">link</a>` : ''}
+                <div class="article-meta">${src.metadata?.primary_category || ''}</div>
+              </li>
+            `).join('')}
+          </ul>
+        `;
+      } catch (error) {
+        chatStatus.textContent = error.message;
+        chatStatus.classList.add('error');
+        chatResponse.innerHTML = '';
+      }
+    }
+
+    primarySelect.addEventListener('change', updateSecondaryOptions);
+    filterButton.addEventListener('click', fetchArticles);
+    searchButton.addEventListener('click', searchSimilar);
+    chatButton.addEventListener('click', askChat);
+
+    loadCategories();
+  </script>
+</body>
+</html>

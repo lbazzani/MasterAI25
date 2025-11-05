@@ -1,0 +1,1569 @@
+[
+  {
+    "primary_category": "politica",
+    "count": 30,
+    "secondary_categories": [
+      {
+        "name": "elezioni",
+        "count": 15
+      },
+      {
+        "name": "giustizia",
+        "count": 7
+      },
+      {
+        "name": "partiti politici",
+        "count": 4
+      },
+      {
+        "name": "media",
+        "count": 3
+      },
+      {
+        "name": "diritti civili",
+        "count": 3
+      },
+      {
+        "name": "diritti umani",
+        "count": 3
+      },
+      {
+        "name": "cultura",
+        "count": 3
+      },
+      {
+        "name": "relazioni internazionali",
+        "count": 3
+      },
+      {
+        "name": "economia",
+        "count": 3
+      },
+      {
+        "name": "esteri",
+        "count": 2
+      }
+    ],
+    "topic_keywords": [
+      {
+        "keyword": "trump",
+        "count": 8
+      },
+      {
+        "keyword": "politica",
+        "count": 7
+      },
+      {
+        "keyword": "elezioni",
+        "count": 6
+      },
+      {
+        "keyword": "donald trump",
+        "count": 6
+      },
+      {
+        "keyword": "new york city",
+        "count": 5
+      },
+      {
+        "keyword": "governo",
+        "count": 5
+      },
+      {
+        "keyword": "zohran mamdani",
+        "count": 5
+      },
+      {
+        "keyword": "social media",
+        "count": 4
+      },
+      {
+        "keyword": "mamdani",
+        "count": 4
+      },
+      {
+        "keyword": "new york",
+        "count": 4
+      },
+      {
+        "keyword": "votanti",
+        "count": 3
+      },
+      {
+        "keyword": "virginia",
+        "count": 3
+      },
+      {
+        "keyword": "ranucci",
+        "count": 3
+      },
+      {
+        "keyword": "report",
+        "count": 3
+      },
+      {
+        "keyword": "democratici",
+        "count": 3
+      }
+    ],
+    "sample_articles": [
+      {
+        "id": 154002802,
+        "title": "GOP Kentucky Election Chief’s Exasperated Voting PSA Goes Viral: ‘We’re Getting Calls…’",
+        "description": "“Have I mentioned my repeated call for civic education,” Kentucky Secretary of State Michael Adams wrote in a follow-up post."
+      },
+      {
+        "id": 153983148,
+        "title": "Report, i deliri di Scarpinato. \"Il governo dietro la bomba\"",
+        "description": "Durante l’audizione all’Antimafia il senatore M5s lancia insinuazioni su Fazzolari. Il sottosegretario: \"Inorridito\""
+      },
+      {
+        "id": 153985618,
+        "title": "Gli incontri di Hannoun e Hijazi in Parlamento: non solo convegni e selfie, si riunivano con Pd e 5 Stelle",
+        "description": "Non solo selfie e inviti ai convegni. Mohammad Hannoun, il giordano filo Hamas al centro dell’inchiesta de Il Tempo che ha di recente ricevuto i..."
+      },
+      {
+        "id": 153984023,
+        "title": "Donald Trump Has All-Caps Reaction To GOP's Disastrous Election Night",
+        "description": "The president tried to offer an excuse for the party's trouncing this week."
+      },
+      {
+        "id": 153997814,
+        "title": "Alan Friedman non si tiene su Mamdani: \"Farà un disastro\". Gelo da Parenzo",
+        "description": "La sinistra gioisce per la \"splendida vittoria di Zohran Mamdani a New York!\", esclama per esempio la segretaria del Pd Elly Schlein ch..."
+      }
+    ]
+  },
+  {
+    "primary_category": "cronaca",
+    "count": 15,
+    "secondary_categories": [
+      {
+        "name": "giustizia",
+        "count": 10
+      },
+      {
+        "name": "sicurezza pubblica",
+        "count": 5
+      },
+      {
+        "name": "sicurezza",
+        "count": 3
+      },
+      {
+        "name": "trasporti",
+        "count": 2
+      },
+      {
+        "name": "incidenti",
+        "count": 1
+      },
+      {
+        "name": "diritti umani",
+        "count": 1
+      },
+      {
+        "name": "incidenti aerei",
+        "count": 1
+      },
+      {
+        "name": "emergenza",
+        "count": 1
+      },
+      {
+        "name": "crimine",
+        "count": 1
+      },
+      {
+        "name": "politica",
+        "count": 1
+      }
+    ],
+    "topic_keywords": [
+      {
+        "keyword": "polizia",
+        "count": 5
+      },
+      {
+        "keyword": "emergenza",
+        "count": 5
+      },
+      {
+        "keyword": "violenza",
+        "count": 4
+      },
+      {
+        "keyword": "giustizia",
+        "count": 3
+      },
+      {
+        "keyword": "sicurezza",
+        "count": 3
+      },
+      {
+        "keyword": "incidente",
+        "count": 3
+      },
+      {
+        "keyword": "aeroporto",
+        "count": 3
+      },
+      {
+        "keyword": "attacco",
+        "count": 3
+      },
+      {
+        "keyword": "testimoni",
+        "count": 2
+      },
+      {
+        "keyword": "ups",
+        "count": 2
+      },
+      {
+        "keyword": "esplosione",
+        "count": 2
+      },
+      {
+        "keyword": "feriti",
+        "count": 2
+      },
+      {
+        "keyword": "fuoco",
+        "count": 2
+      },
+      {
+        "keyword": "worldport",
+        "count": 2
+      },
+      {
+        "keyword": "shelter-in-place",
+        "count": 2
+      }
+    ],
+    "sample_articles": [
+      {
+        "id": 154001622,
+        "title": "A Rovigo spara e ferisce il ladro ma non è indagato grazie alla nuova legge sulla legittima difesa",
+        "description": "L’uomo che ha sparato, un 68enne, non risulta essere indagato"
+      },
+      {
+        "id": 153970084,
+        "title": "At Least 3 Dead, 11 Injured In UPS Plane Crash In Kentucky And Governor Says Numbers Likely To Grow",
+        "description": "The crash ignited a massive fire that left a thick plume of black smoke over the area."
+      },
+      {
+        "id": 154001877,
+        "title": "Almasri arrestato a Tripoli: è accusato di tortura sui detenuti e della morte di uno di loro",
+        "description": "Il generale libico ed ex capo della polizia penitenziaria libica è stato posto in custodia cautelare: avrebbe commesso maltrattamenti omicidi nel carcere di Mitiga"
+      },
+      {
+        "id": 153989198,
+        "title": "Il sistema si inceppa e non ci protegge più",
+        "description": "Una donna che andava al lavoro, una mattina qualunque, è stata pugnalata alle spalle da uno sconosciuto che non avrebbe dovuto trovarsi lì"
+      },
+      {
+        "id": 153961592,
+        "title": "UPS jet crashes near Louisville airport; injuries and huge fire reported: Live updates",
+        "description": "The Louisville Metro Police Department said multiple agencies are responding to a reported plane crash near the Louisville Airport."
+      }
+    ]
+  },
+  {
+    "primary_category": "finanza",
+    "count": 13,
+    "secondary_categories": [
+      {
+        "name": "mercati",
+        "count": 8
+      },
+      {
+        "name": "economia",
+        "count": 7
+      },
+      {
+        "name": "tecnologia",
+        "count": 6
+      },
+      {
+        "name": "salute",
+        "count": 2
+      },
+      {
+        "name": "investimenti",
+        "count": 2
+      },
+      {
+        "name": "politica",
+        "count": 1
+      },
+      {
+        "name": "impresa",
+        "count": 1
+      },
+      {
+        "name": "imprese",
+        "count": 1
+      },
+      {
+        "name": "politica monetaria",
+        "count": 1
+      },
+      {
+        "name": "mercati finanziari",
+        "count": 1
+      }
+    ],
+    "topic_keywords": [
+      {
+        "keyword": "investitori",
+        "count": 4
+      },
+      {
+        "keyword": "wall street",
+        "count": 4
+      },
+      {
+        "keyword": "intelligenza artificiale",
+        "count": 3
+      },
+      {
+        "keyword": "azioni",
+        "count": 3
+      },
+      {
+        "keyword": "novo nordisk",
+        "count": 3
+      },
+      {
+        "keyword": "interesse",
+        "count": 3
+      },
+      {
+        "keyword": "investimenti",
+        "count": 3
+      },
+      {
+        "keyword": "trading",
+        "count": 3
+      },
+      {
+        "keyword": "mercati",
+        "count": 3
+      },
+      {
+        "keyword": "s&p 500",
+        "count": 3
+      },
+      {
+        "keyword": "hang seng",
+        "count": 3
+      },
+      {
+        "keyword": "valutazioni",
+        "count": 2
+      },
+      {
+        "keyword": "mercati europei",
+        "count": 2
+      },
+      {
+        "keyword": "ftse",
+        "count": 2
+      },
+      {
+        "keyword": "dax",
+        "count": 2
+      }
+    ],
+    "sample_articles": [
+      {
+        "id": 154000438,
+        "title": "Election results, McDonald's earnings, AI valuation fears and more in Morning Squawk",
+        "description": "Here are five key things investors need to know to start the trading day."
+      },
+      {
+        "id": 153981819,
+        "title": "Europe to open lower as markets question tech valuations; Novo Nordisk earnings ahead",
+        "description": "European stocks are expected to open lower, mirroring global declines as concerns grow over sky-high tech valuations."
+      },
+      {
+        "id": 153927760,
+        "title": "Pfizer tops estimates, raises profit guidance even as sales fall",
+        "description": "Pfizer hiked its full-year profit guidance, citing its strong business performance and cost cuts, even as sales for the period fell. "
+      },
+      {
+        "id": 153930985,
+        "title": "Palantir earnings, Pizza Hut's options, a new consumer staples giant and more in Morning Squawk",
+        "description": "Here are five key things investors need to know to start the trading day."
+      },
+      {
+        "id": 153911946,
+        "title": "European markets set to open lower; BP, Philips and Ferrari earnings to come",
+        "description": "European stocks are expected to open in negative territory on Tuesday, reversing positive sentiment seen at the start of the new trading month."
+      }
+    ]
+  },
+  {
+    "primary_category": "cultura",
+    "count": 13,
+    "secondary_categories": [
+      {
+        "name": "intrattenimento",
+        "count": 6
+      },
+      {
+        "name": "arte",
+        "count": 2
+      },
+      {
+        "name": "musica",
+        "count": 2
+      },
+      {
+        "name": "televisione",
+        "count": 2
+      },
+      {
+        "name": "celebrità",
+        "count": 2
+      },
+      {
+        "name": "politica",
+        "count": 2
+      },
+      {
+        "name": "turismo",
+        "count": 2
+      },
+      {
+        "name": "media",
+        "count": 2
+      },
+      {
+        "name": "umorismo",
+        "count": 1
+      },
+      {
+        "name": "società",
+        "count": 1
+      }
+    ],
+    "topic_keywords": [
+      {
+        "keyword": "umorismo",
+        "count": 3
+      },
+      {
+        "keyword": "politica",
+        "count": 3
+      },
+      {
+        "keyword": "social media",
+        "count": 3
+      },
+      {
+        "keyword": "critica",
+        "count": 3
+      },
+      {
+        "keyword": "satira",
+        "count": 2
+      },
+      {
+        "keyword": "discussione",
+        "count": 2
+      },
+      {
+        "keyword": "halloween",
+        "count": 2
+      },
+      {
+        "keyword": "seth meyers",
+        "count": 2
+      },
+      {
+        "keyword": "late night",
+        "count": 2
+      },
+      {
+        "keyword": "catapulte",
+        "count": 2
+      },
+      {
+        "keyword": "creatività",
+        "count": 2
+      },
+      {
+        "keyword": "immigrazione",
+        "count": 2
+      },
+      {
+        "keyword": "giorgio forattini",
+        "count": 1
+      },
+      {
+        "keyword": "vignettista",
+        "count": 1
+      },
+      {
+        "keyword": "amicizia",
+        "count": 1
+      }
+    ],
+    "sample_articles": [
+      {
+        "id": 153983149,
+        "title": "A colpi di matita ha reso il mondo un posto migliore",
+        "description": "Vittorio Feltri racconta il legame umano con il grande vignettista scomparso"
+      },
+      {
+        "id": 153989391,
+        "title": "Paolo Conte, Original, in mostra non solo musica ma la sua arte - Piemonte - Ansa.it",
+        "description": "«Paolo Conte, Original». (ANSA)"
+      },
+      {
+        "id": 153950815,
+        "title": "‘What The F**k’: ‘Dancing With The Stars’ Judges Accused Of Treating ‘90s TV Actor Unfairly",
+        "description": "“At this point, it’s starting to feel like a personal vendetta,” the contestant’s former co-star said."
+      },
+      {
+        "id": 153922149,
+        "title": "Ascolti tv, la fiction Blanca stacca il Grande Fratello. Giletti, Porro e Augias, chi ha vinto?",
+        "description": "Gli ascolti del lunedì televisivo vedono, su Rai1, la terza stagione della fiction Blanca conquistare una media di 4.253.000 spettatori pa..."
+      },
+      {
+        "id": 153920873,
+        "title": "'How Dare You': Seth Meyers Directly Responds To Trump's 'Truly Deranged' Personal Attack",
+        "description": "The \"Late Night\" host wasn't having it with the president's \"ranting and raving\" about him."
+      }
+    ]
+  },
+  {
+    "primary_category": "economia",
+    "count": 11,
+    "secondary_categories": [
+      {
+        "name": "finanza",
+        "count": 5
+      },
+      {
+        "name": "innovazione",
+        "count": 2
+      },
+      {
+        "name": "politica",
+        "count": 2
+      },
+      {
+        "name": "energia",
+        "count": 2
+      },
+      {
+        "name": "impresa",
+        "count": 2
+      },
+      {
+        "name": "politiche sociali",
+        "count": 1
+      },
+      {
+        "name": "istruzione",
+        "count": 1
+      },
+      {
+        "name": "sanità",
+        "count": 1
+      },
+      {
+        "name": "welfare",
+        "count": 1
+      },
+      {
+        "name": "ambiente",
+        "count": 1
+      }
+    ],
+    "topic_keywords": [
+      {
+        "keyword": "economia",
+        "count": 3
+      },
+      {
+        "keyword": "crescita",
+        "count": 3
+      },
+      {
+        "keyword": "povertà",
+        "count": 2
+      },
+      {
+        "keyword": "sostenibilità",
+        "count": 2
+      },
+      {
+        "keyword": "innovazione",
+        "count": 2
+      },
+      {
+        "keyword": "tecnologia",
+        "count": 2
+      },
+      {
+        "keyword": "rachel reeves",
+        "count": 2
+      },
+      {
+        "keyword": "produzione",
+        "count": 2
+      },
+      {
+        "keyword": "dividendo",
+        "count": 2
+      },
+      {
+        "keyword": "cina",
+        "count": 2
+      },
+      {
+        "keyword": "welfare italia index",
+        "count": 1
+      },
+      {
+        "keyword": "divario nord sud",
+        "count": 1
+      },
+      {
+        "keyword": "previdenza",
+        "count": 1
+      },
+      {
+        "keyword": "spesa pubblica",
+        "count": 1
+      },
+      {
+        "keyword": "istruzione",
+        "count": 1
+      }
+    ],
+    "sample_articles": [
+      {
+        "id": 153983037,
+        "title": "Welfare, crescono i divari tra Nord e Sud: prima Trento, ultima la Calabria",
+        "description": "Secondo il Welfare Italia Index 2025 la previdenza pesa il 16% del Pil rispetto ad una media dell’Eurozona del 12,3%, sotto la media europea per la spesa per l’istruzione pari al 3,9% del Pil (contro il 4,6%) e per le politiche sociali al 4,9% (contro il 7,3%)"
+      },
+      {
+        "id": 153910086,
+        "title": "Ecomondo 2025, espositori in crescita ",
+        "description": "Dai 1.600 del 2024 ai 1.700 dell’edizione che si apre in fiera a Rimini il 4 novembre fino al 7, riferimento per l’economia circolare"
+      },
+      {
+        "id": 153931498,
+        "title": "Crown prince: Saudi Arabia emerging as a global hub for investment, innovation",
+        "description": "RIYADH: Crown Prince Mohammed bin Salman on Tuesday reaffirmed Saudi Arabia’s growing status as a leading global destination for investment and innovation, as he chaired the weekly cabinet session in Riyadh. At the start of the meeting, the crown prince briefed ministers on the outcomes of his discussions with several world leaders and heads of government who visited the Kingdom to participate in the Future Investment Initiative (FII) conference."
+      },
+      {
+        "id": 153918956,
+        "title": "Watch live: Rachel Reeves makes major pre-Budget speech",
+        "description": "Watch live as Rachel Reeves sets out her economic priorities in a pre-Budget speech on Tuesday (4 November)."
+      },
+      {
+        "id": 153928187,
+        "title": "Which taxes could rise at next Budget?",
+        "description": "There are many options on the table as the chancellor looks to raise considerable sums"
+      }
+    ]
+  },
+  {
+    "primary_category": "sport",
+    "count": 3,
+    "secondary_categories": [
+      {
+        "name": "turismo",
+        "count": 1
+      },
+      {
+        "name": "infrastrutture",
+        "count": 1
+      },
+      {
+        "name": "eventi",
+        "count": 1
+      },
+      {
+        "name": "automotive",
+        "count": 1
+      },
+      {
+        "name": "tecnologia",
+        "count": 1
+      },
+      {
+        "name": "giustizia",
+        "count": 1
+      },
+      {
+        "name": "economia",
+        "count": 1
+      }
+    ],
+    "topic_keywords": [
+      {
+        "keyword": "sci",
+        "count": 1
+      },
+      {
+        "keyword": "impianti di risalita",
+        "count": 1
+      },
+      {
+        "keyword": "neve programmata",
+        "count": 1
+      },
+      {
+        "keyword": "casco obbligatorio",
+        "count": 1
+      },
+      {
+        "keyword": "stagione invernale",
+        "count": 1
+      },
+      {
+        "keyword": "turismo",
+        "count": 1
+      },
+      {
+        "keyword": "nord europa",
+        "count": 1
+      },
+      {
+        "keyword": "est europa",
+        "count": 1
+      },
+      {
+        "keyword": "madonna di campiglio",
+        "count": 1
+      },
+      {
+        "keyword": "dolomiti superski",
+        "count": 1
+      },
+      {
+        "keyword": "skipass",
+        "count": 1
+      },
+      {
+        "keyword": "olimpiadi",
+        "count": 1
+      },
+      {
+        "keyword": "attività après ski",
+        "count": 1
+      },
+      {
+        "keyword": "mobilità integrata",
+        "count": 1
+      },
+      {
+        "keyword": "livigno",
+        "count": 1
+      }
+    ],
+    "sample_articles": [
+      {
+        "id": 153974979,
+        "title": "Sci al via, nuovi impianti e più clienti esteri",
+        "description": "Parte la stagione invernale con l’obbligo del casco per tutti. Business da oltre 12 miliardi grazie agli ospiti del Nord e dell’Est Europa"
+      },
+      {
+        "id": 154003823,
+        "title": "“So much more menacing”: Formula E’s new Gen4 car breaks cover",
+        "description": "Up to 700 kW regen braking, new Bridgestone tires, and it’s even fully recyclable."
+      },
+      {
+        "id": 153995788,
+        "title": "San Siro passa a Inter e Milan, firmato il rogito. Ma la procura indaga per turbativa d'asta",
+        "description": "Nel giorno in cui il Meazza passa di proprietà, è arrivata la notizia che la procura di Milano sta indagando sulla compravendita con l'ipotesi di turbativa d'asta"
+      }
+    ]
+  },
+  {
+    "primary_category": "salute",
+    "count": 3,
+    "secondary_categories": [
+      {
+        "name": "nutrizione",
+        "count": 2
+      },
+      {
+        "name": "benessere",
+        "count": 2
+      },
+      {
+        "name": "medicina",
+        "count": 1
+      },
+      {
+        "name": "istruzione",
+        "count": 1
+      },
+      {
+        "name": "politiche sociali",
+        "count": 1
+      },
+      {
+        "name": "mercato del lavoro",
+        "count": 1
+      },
+      {
+        "name": "dieta",
+        "count": 1
+      }
+    ],
+    "topic_keywords": [
+      {
+        "keyword": "salute",
+        "count": 2
+      },
+      {
+        "keyword": "melatonina",
+        "count": 1
+      },
+      {
+        "keyword": "insomnia",
+        "count": 1
+      },
+      {
+        "keyword": "cuore",
+        "count": 1
+      },
+      {
+        "keyword": "integratori",
+        "count": 1
+      },
+      {
+        "keyword": "rischi",
+        "count": 1
+      },
+      {
+        "keyword": "studio",
+        "count": 1
+      },
+      {
+        "keyword": "effetti collaterali",
+        "count": 1
+      },
+      {
+        "keyword": "sonno",
+        "count": 1
+      },
+      {
+        "keyword": "terapia comportamentale",
+        "count": 1
+      },
+      {
+        "keyword": "sogni",
+        "count": 1
+      },
+      {
+        "keyword": "regolazione",
+        "count": 1
+      },
+      {
+        "keyword": "adulti",
+        "count": 1
+      },
+      {
+        "keyword": "sovradosaggio",
+        "count": 1
+      },
+      {
+        "keyword": "cognitivo",
+        "count": 1
+      }
+    ],
+    "sample_articles": [
+      {
+        "id": 154009321,
+        "title": "The long-term risks of melatonin no one talked about – until now",
+        "description": "Long-term melatonin was use associated with heart failure, according to a new study. But there's more to the story."
+      },
+      {
+        "id": 153986128,
+        "title": "Welfare, sul capitale umano si gioca il futuro dell’Italia a cominciare dai giovani",
+        "description": "Fino a 2,8 milioni di occupati e fino a 226 miliardi di euro di Pil (+10,6%) con una strategia nazionale su istruzione, lavoro, competenze, salute e prevenzione: la ricetta del Think Thank Welfare Italia a patto di una inversione di tendenza sugli investimenti nelle persone"
+      },
+      {
+        "id": 153869411,
+        "title": "The Ripeness Level Of Your Banana Actually Matters For Your Health— Here's How",
+        "description": "The nutritional content in a banana changes as it ripens. What ripeness level is best for you?"
+      }
+    ]
+  },
+  {
+    "primary_category": "tecnologia",
+    "count": 3,
+    "secondary_categories": [
+      {
+        "name": "intelligenza artificiale",
+        "count": 2
+      },
+      {
+        "name": "diritto",
+        "count": 1
+      },
+      {
+        "name": "privacy",
+        "count": 1
+      },
+      {
+        "name": "software",
+        "count": 1
+      },
+      {
+        "name": "aggiornamenti",
+        "count": 1
+      },
+      {
+        "name": "dispositivi mobili",
+        "count": 1
+      },
+      {
+        "name": "cloud computing",
+        "count": 1
+      },
+      {
+        "name": "infrastrutture tecnologiche",
+        "count": 1
+      }
+    ],
+    "topic_keywords": [
+      {
+        "keyword": "intelligenza artificiale",
+        "count": 2
+      },
+      {
+        "keyword": "tiktok",
+        "count": 1
+      },
+      {
+        "keyword": "algoritmo",
+        "count": 1
+      },
+      {
+        "keyword": "foryou",
+        "count": 1
+      },
+      {
+        "keyword": "bytedance",
+        "count": 1
+      },
+      {
+        "keyword": "oracle",
+        "count": 1
+      },
+      {
+        "keyword": "apec",
+        "count": 1
+      },
+      {
+        "keyword": "cina",
+        "count": 1
+      },
+      {
+        "keyword": "governance dei dati",
+        "count": 1
+      },
+      {
+        "keyword": "diritto d'autore",
+        "count": 1
+      },
+      {
+        "keyword": "brevetti",
+        "count": 1
+      },
+      {
+        "keyword": "segreti commerciali",
+        "count": 1
+      },
+      {
+        "keyword": "normativa",
+        "count": 1
+      },
+      {
+        "keyword": "trattative legali",
+        "count": 1
+      },
+      {
+        "keyword": "sicurezza nazionale",
+        "count": 1
+      }
+    ],
+    "sample_articles": [
+      {
+        "id": 153916450,
+        "title": "TikTok, il nodo irrisolto dell’algoritmo",
+        "description": "I contendenti dovranno accordarsi su ForYou, l’algoritmo più popolare al mondo che suggerisce video in linea con i gusti dell’utente"
+      },
+      {
+        "id": 153899831,
+        "title": "Apple releases iOS 26.1, macOS 26.1, other updates with Liquid Glass controls and more",
+        "description": "New updates include a small but noteworthy batch of fixes and features."
+      },
+      {
+        "id": 153861440,
+        "title": "OpenAI signs $38 billion compute deal with Amazon, partnering with cloud leader for first time",
+        "description": "OpenAI will immediately begin tapping Nvidia's AI processors using infrastructure from Amazon Web Services."
+      }
+    ]
+  },
+  {
+    "primary_category": "esteri",
+    "count": 3,
+    "secondary_categories": [
+      {
+        "name": "relazioni internazionali",
+        "count": 2
+      },
+      {
+        "name": "politica",
+        "count": 2
+      },
+      {
+        "name": "diplomazia",
+        "count": 1
+      },
+      {
+        "name": "commercio",
+        "count": 1
+      },
+      {
+        "name": "conflitti",
+        "count": 1
+      }
+    ],
+    "topic_keywords": [
+      {
+        "keyword": "diplomazia",
+        "count": 2
+      },
+      {
+        "keyword": "arabia saudita",
+        "count": 1
+      },
+      {
+        "keyword": "giappone",
+        "count": 1
+      },
+      {
+        "keyword": "relazioni",
+        "count": 1
+      },
+      {
+        "keyword": "cooperazione",
+        "count": 1
+      },
+      {
+        "keyword": "stabilità",
+        "count": 1
+      },
+      {
+        "keyword": "prosperità",
+        "count": 1
+      },
+      {
+        "keyword": "vision 2030",
+        "count": 1
+      },
+      {
+        "keyword": "energia",
+        "count": 1
+      },
+      {
+        "keyword": "petrolio",
+        "count": 1
+      },
+      {
+        "keyword": "investimenti",
+        "count": 1
+      },
+      {
+        "keyword": "decarbonizzazione",
+        "count": 1
+      },
+      {
+        "keyword": "cerimonia",
+        "count": 1
+      },
+      {
+        "keyword": "partenariato",
+        "count": 1
+      },
+      {
+        "keyword": "crescita",
+        "count": 1
+      }
+    ],
+    "sample_articles": [
+      {
+        "id": 153885467,
+        "title": "Saudi Arabia and Japan mark 70 years of diplomacy in Riyadh",
+        "description": "RIYADH: Saudi Arabia and Japan held a ceremony in the capital Riyadh on Monday to commemorate the 70th anniversary of diplomatic relations between their countries. During a speech, Saudi Vice Minister of Foreign Affairs Waleed Al-Khereiji highlighted the strong relationship between Saudi Arabia and Japan. He said that their cooperation, which began in 1955, plays a crucial role in promoting regional and global stability and prosperity. “The tireless work between the two friendly countries can push mutual relations to a new stage,” he said."
+      },
+      {
+        "id": 153882819,
+        "title": "Saudi FM participates in talks on Gaza held in Istanbul",
+        "description": "RIYADH: Saudi Foreign Minister Prince Faisal bin Farhan participated in a ministerial meeting on Gaza hosted by Turkiye on Monday, Saudi Press Agency reported. The talks involved top diplomats from Qatar, the UAE, Jordan, Pakistan and Indonesia, and discussed developments in the Gaza Strip and efforts made to establish peace in the region. The implementation of US President Donald Trump’s plan to end the war in Gaza and the outcomes of the Sharm El-Sheikh Summit were discussed."
+      },
+      {
+        "id": 153862682,
+        "title": "\"L'Italia sprofonderà se spreca soldi per Kiev\". Mosca attacca dopo il crollo ai Fori Imperiali",
+        "description": "Il nuovo affondo dal Cremlino per il sostegno fornito da Roma a Kiev: ecco cos’ha detto Maria Zakharova"
+      }
+    ]
+  },
+  {
+    "primary_category": "mobilità",
+    "count": 2,
+    "secondary_categories": [
+      {
+        "name": "trasporto pubblico",
+        "count": 1
+      },
+      {
+        "name": "concorrenza",
+        "count": 1
+      },
+      {
+        "name": "trasporti",
+        "count": 1
+      },
+      {
+        "name": "infrastrutture",
+        "count": 1
+      },
+      {
+        "name": "economia",
+        "count": 1
+      }
+    ],
+    "topic_keywords": [
+      {
+        "keyword": "consulta",
+        "count": 1
+      },
+      {
+        "keyword": "stato",
+        "count": 1
+      },
+      {
+        "keyword": "vincoli",
+        "count": 1
+      },
+      {
+        "keyword": "ncc",
+        "count": 1
+      },
+      {
+        "keyword": "taxi",
+        "count": 1
+      },
+      {
+        "keyword": "concorrenza",
+        "count": 1
+      },
+      {
+        "keyword": "servizio",
+        "count": 1
+      },
+      {
+        "keyword": "utenza",
+        "count": 1
+      },
+      {
+        "keyword": "licenze",
+        "count": 1
+      },
+      {
+        "keyword": "misura",
+        "count": 1
+      },
+      {
+        "keyword": "sproporzionata",
+        "count": 1
+      },
+      {
+        "keyword": "competenza",
+        "count": 1
+      },
+      {
+        "keyword": "trasporto pubblico locale",
+        "count": 1
+      },
+      {
+        "keyword": "obblighi",
+        "count": 1
+      },
+      {
+        "keyword": "divieti",
+        "count": 1
+      }
+    ],
+    "sample_articles": [
+      {
+        "id": 153928960,
+        "title": "Consulta, non spetta allo Stato imporre vincoli a Ncc per concorrenza con taxi",
+        "description": "Secondo la Corte, il vincolo temporale di venti minuti tra un servizio Ncc e l’atro è «una misura sproporzionata rispetto alla finalità antielusiva, vòlta a evitare che il servizio Ncc possa rivolgersi a una utenza indifferenziata, riservata ai soli titolari di licenze taxi»"
+      },
+      {
+        "id": 153941092,
+        "title": "Ecco il piano Ue per l’espansione della rete ferroviaria ad alta velocità",
+        "description": "L'Ue pianifica di espandere la rete ferroviaria ad alta velocità, con alcuni paesi all’avanguardia e altri in ritardo"
+      }
+    ]
+  },
+  {
+    "primary_category": "impresa",
+    "count": 1,
+    "secondary_categories": [
+      {
+        "name": "tecnologia",
+        "count": 1
+      },
+      {
+        "name": "mobilità",
+        "count": 1
+      }
+    ],
+    "topic_keywords": [
+      {
+        "keyword": "omer",
+        "count": 1
+      },
+      {
+        "keyword": "knorr-bremse",
+        "count": 1
+      },
+      {
+        "keyword": "treni regionali",
+        "count": 1
+      },
+      {
+        "keyword": "moduli toilet",
+        "count": 1
+      },
+      {
+        "keyword": "investimento",
+        "count": 1
+      },
+      {
+        "keyword": "carini",
+        "count": 1
+      },
+      {
+        "keyword": "backlog",
+        "count": 1
+      },
+      {
+        "keyword": "alstom",
+        "count": 1
+      },
+      {
+        "keyword": "nah.sh",
+        "count": 1
+      },
+      {
+        "keyword": "programma innorail",
+        "count": 1
+      },
+      {
+        "keyword": "sviluppo",
+        "count": 1
+      },
+      {
+        "keyword": "tecnologie avanzate",
+        "count": 1
+      },
+      {
+        "keyword": "competitività",
+        "count": 1
+      },
+      {
+        "keyword": "automazione",
+        "count": 1
+      },
+      {
+        "keyword": "logistica",
+        "count": 1
+      }
+    ],
+    "sample_articles": [
+      {
+        "id": 154007717,
+        "title": "Omer, nuova commessa per i treni regionali tedeschi",
+        "description": "Avviate dall’azienda con sede a Carini (Palermo) le attività operative per la realizzazione di moduli toilet per il gruppo Knorr-Bremse"
+      }
+    ]
+  },
+  {
+    "primary_category": "giustizia",
+    "count": 1,
+    "secondary_categories": [
+      {
+        "name": "urbanistica",
+        "count": 1
+      },
+      {
+        "name": "corruzione",
+        "count": 1
+      },
+      {
+        "name": "politica",
+        "count": 1
+      }
+    ],
+    "topic_keywords": [
+      {
+        "keyword": "cassazione",
+        "count": 1
+      },
+      {
+        "keyword": "corruzione",
+        "count": 1
+      },
+      {
+        "keyword": "milano",
+        "count": 1
+      },
+      {
+        "keyword": "catella",
+        "count": 1
+      },
+      {
+        "keyword": "procura",
+        "count": 1
+      },
+      {
+        "keyword": "urbanistica",
+        "count": 1
+      },
+      {
+        "keyword": "riesame",
+        "count": 1
+      },
+      {
+        "keyword": "grattacielo",
+        "count": 1
+      },
+      {
+        "keyword": "pirellino",
+        "count": 1
+      },
+      {
+        "keyword": "indagini",
+        "count": 1
+      },
+      {
+        "keyword": "abusi edilizi",
+        "count": 1
+      },
+      {
+        "keyword": "sistema milano",
+        "count": 1
+      },
+      {
+        "keyword": "beppe sala",
+        "count": 1
+      },
+      {
+        "keyword": "stefano boeri",
+        "count": 1
+      },
+      {
+        "keyword": "alessandro scandurra",
+        "count": 1
+      }
+    ],
+    "sample_articles": [
+      {
+        "id": 153983147,
+        "title": "Il pg di Cassazione sconfessa i pm. \"Per Catella non c’è corruzione\"",
+        "description": "L’inchiesta sull’urbanistica a Milano: la procura della Suprema Corte conferma le decisioni del Riesame e respinge il teorema sulla \"cupola\". Il 12 la sentenza"
+      }
+    ]
+  },
+  {
+    "primary_category": "energia",
+    "count": 1,
+    "secondary_categories": [
+      {
+        "name": "petrolio e gas",
+        "count": 1
+      },
+      {
+        "name": "forniture energetiche",
+        "count": 1
+      },
+      {
+        "name": "politica energetica",
+        "count": 1
+      }
+    ],
+    "topic_keywords": [
+      {
+        "keyword": "pakistan",
+        "count": 1
+      },
+      {
+        "keyword": "eni",
+        "count": 1
+      },
+      {
+        "keyword": "lng",
+        "count": 1
+      },
+      {
+        "keyword": "gas naturale",
+        "count": 1
+      },
+      {
+        "keyword": "qatar",
+        "count": 1
+      },
+      {
+        "keyword": "importazioni",
+        "count": 1
+      },
+      {
+        "keyword": "contratti",
+        "count": 1
+      },
+      {
+        "keyword": "supply chain",
+        "count": 1
+      },
+      {
+        "keyword": "energia rinnovabile",
+        "count": 1
+      },
+      {
+        "keyword": "domanda",
+        "count": 1
+      },
+      {
+        "keyword": "surplus",
+        "count": 1
+      },
+      {
+        "keyword": "mercato spot",
+        "count": 1
+      },
+      {
+        "keyword": "sngpl",
+        "count": 1
+      },
+      {
+        "keyword": "pll",
+        "count": 1
+      },
+      {
+        "keyword": "negoziazioni",
+        "count": 1
+      }
+    ],
+    "sample_articles": [
+      {
+        "id": 153931502,
+        "title": "Pakistan cancels Eni LNG cargoes, seeks to renegotiate Qatar supplies",
+        "description": "KARACHI: Pakistan has struck a deal to cancel 21 liquefied natural gas cargoes under its long-term contract with Italy’s Eni as part of a plan to curb excess imports that have flooded its gas network, according to an official document and two sources. The document from state-owned Pakistan LNG Ltd. (PLL) to the country’s Ministry of Energy dated October 22 said 11 cargoes planned for 2026 and 10 for 2027 would be canceled at the request of gas distributor SNGPL."
+      }
+    ]
+  },
+  {
+    "primary_category": "istruzione",
+    "count": 1,
+    "secondary_categories": [
+      {
+        "name": "formazione",
+        "count": 1
+      },
+      {
+        "name": "qualità dell'istruzione",
+        "count": 1
+      },
+      {
+        "name": "accreditamento",
+        "count": 1
+      }
+    ],
+    "topic_keywords": [
+      {
+        "keyword": "conferenza",
+        "count": 1
+      },
+      {
+        "keyword": "rete araba",
+        "count": 1
+      },
+      {
+        "keyword": "assicurazione qualità",
+        "count": 1
+      },
+      {
+        "keyword": "istruzione superiore",
+        "count": 1
+      },
+      {
+        "keyword": "accreditamento",
+        "count": 1
+      },
+      {
+        "keyword": "saudi arabia",
+        "count": 1
+      },
+      {
+        "keyword": "collaborazione",
+        "count": 1
+      },
+      {
+        "keyword": "stakeholder",
+        "count": 1
+      },
+      {
+        "keyword": "pratiche internazionali",
+        "count": 1
+      },
+      {
+        "keyword": "professionisti dell'istruzione",
+        "count": 1
+      },
+      {
+        "keyword": "agenzie di qualità",
+        "count": 1
+      },
+      {
+        "keyword": "ricercatori",
+        "count": 1
+      },
+      {
+        "keyword": "studenti",
+        "count": 1
+      },
+      {
+        "keyword": "mercato del lavoro",
+        "count": 1
+      },
+      {
+        "keyword": "modello di qualità saudita",
+        "count": 1
+      }
+    ],
+    "sample_articles": [
+      {
+        "id": 153867711,
+        "title": "Experts to convene for Conference of the Arab Network for Quality Assurance in Higher Education",
+        "description": "RIYADH: Experts and decision makers in higher education will convene for the Sixth Conference of the Arab Network for Quality Assurance in Higher Education on Nov. 15-17 in Riyadh. The event aims to discuss the latest regional and international developments in quality assurance and academic accreditation, and is hosted by Saudi Arabia’s Education and Training Evaluation Commission."
+      }
+    ]
+  }
+]
