@@ -16,11 +16,7 @@ function resolveNewsPath() {
     return localPath;
   }
 
-  // fallback: riutilizza il dataset della vecchia app se esiste
-  const legacyPath = path.resolve(__dirname, '..', '..', 'MatchRicercaLavoro', 'data', 'news.json');
-  if (fs.existsSync(legacyPath)) {
-    return legacyPath;
-  }
+
 
   return localPath; // percorso di default anche se il file non esiste (verrà validato altrove)
 }
