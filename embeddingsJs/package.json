@@ -1,0 +1,16 @@
+{
+  "name": "news-embeddings",
+  "version": "1.0.0",
+  "description": "Genera embeddings per notizie usando OpenAI",
+  "type": "module",
+  "scripts": {
+    "fetch": "node src/fetch-and-embed.js"
+  },
+  "keywords": ["embeddings", "news", "openai"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "openai": "^4.73.0",
+    "dotenv": "^16.4.7"
+  }
+}
