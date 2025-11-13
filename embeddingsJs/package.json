@@ -4,7 +4,10 @@
   "description": "Genera embeddings per notizie usando OpenAI",
   "type": "module",
   "scripts": {
-    "fetch": "node src/fetch-and-embed.js"
+    "fetch": "node src/fetch-and-embed.js",
+    "similar": "node src/find-similar.js",
+    "dense": "node src/find-dense.js",
+    "summarize": "node src/summarize-clusters.js"
   },
   "keywords": ["embeddings", "news", "openai"],
   "author": "",

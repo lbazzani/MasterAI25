@@ -101,6 +101,71 @@ similarities.sort((a, b) => b.similarity - a.similarity);
 console.log('Notizie più simili:', similarities.slice(0, 5));
 ```
 
+## 🔎 Trova Notizie Simili da CLI
+
+Con gli embeddings generati puoi confrontare rapidamente una notizia e trovare le più vicine (similarità coseno) direttamente dal terminale:
+
+```bash
+npm run similar -- --id 154204439 --top 3
+```
+
+- `--id` (`-i`): ID della notizia da usare come riferimento (obbligatorio se non vuoi l'interfaccia interattiva)
+- `--top` (`-k`): Quante notizie mostrare (default `3`, sovrascrivibile anche tramite env `DEFAULT_TOP_K`)
+
+L'output riporta per ogni notizia:
+- **vicinanza**: similarità coseno tra la notizia scelta e il candidato
+- **distanza**: `1 - vicinanza`, utile se preferisci ragionare in termini di distanza invece che vicinanza
+
+Se non passi l'ID, lo script ti chiederà di inserirlo da tastiera. L'output mostrerà titolo, descrizione (troncata) e punteggio di similarità per i migliori risultati.
+
+### Cluster di notizie dense
+
+Vuoi capire quali notizie hanno molte "vicine" entro una certa soglia di distanza? Usa il comando:
+
+```bash
+npm run dense -- --distance 0.4 --neighbors 3
+```
+
+- `--distance` (`-d`): distanza massima consentita (default `0.4`, equivalente a vicinanza ≥ `0.6`)
+- `--neighbors` (`-n`): numero minimo di vicine richiesto per riportare la notizia (default `3`)
+- `--out` (`-o`): percorso del JSON in cui salvare i cluster (default `data/clusters.json`, configurabile via `CLUSTERS_OUTPUT`)
+- puoi impostare i default anche da `.env` con `MAX_DISTANCE`, `MIN_NEIGHBORS`, `CLUSTERS_OUTPUT`
+
+Per ogni notizia che soddisfa i criteri vengono mostrati fino a 5 vicini più significativi con relativi valori di vicinanza e distanza. Le notizie già aggregate in un cluster non verranno ripetute in gruppi successivi, così da evidenziare cluster unici.
+
+In parallelo il comando salva un JSON pronto per essere usato come prompt per LLM:
+
+```json
+[
+  [
+    "Titolo cluster 1\nDescrizione cluster 1",
+    "Titolo vicino 1\nDescrizione vicino 1",
+    "..."
+  ],
+  [
+    "Titolo cluster 2\nDescrizione cluster 2",
+    "..."
+  ]
+]
+```
+
+Ogni elemento dell'array principale rappresenta un cluster e contiene solo i testi (titolo + descrizione) di tutte le notizie del gruppo.
+
+### Sommario dei cluster con ChatGPT
+
+Per generare automaticamente un sommario di tutti i cluster usa:
+
+```bash
+npm run summarize -- --input clusters.json --out cluster-summary.txt --model gpt-4o-mini
+```
+
+- `--input` (`-i`): file JSON generato da `npm run dense` (default `data/clusters.json`, configurabile tramite `CLUSTERS_OUTPUT`)
+- `--out` (`-o`): file di output del sommario (default `data/cluster-summary.txt`, override con `CLUSTER_SUMMARY_FILE`)
+- `--model` (`-m`): modello OpenAI da usare (default `gpt-4o-mini`, override con `SUMMARY_MODEL`)
+- `--lang` (`-l`): lingua del riassunto (default `italiano`, override con `SUMMARY_LANGUAGE`)
+
+Lo script invia l'intero JSON al modello (usando `OPENAI_API_KEY`) e salva un sommario strutturato, pronto da condividere o pubblicare.
+
 ## 💰 Costi
 
 **OpenAI Embeddings** (`text-embedding-3-small`):
