@@ -10,6 +10,7 @@ Pytorch/results/
 Pytorch/sentiment-model/
 intent-classifier-tf/__pycache__/
 intent-classifier-tf/intent_model/
+langchain-agent-workshop-local-ollama/__pycache__/
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
