@@ -1,0 +1,12 @@
+# File: requirements.txt
+# Copia questo contenuto in un file chiamato requirements.txt
+
+crewai>=1.6.0
+crewai-tools>=0.14.0
+python-dotenv>=1.0.0
+openai>=1.54.0
+langchain-openai>=0.1.0
+
+# Opzionale: per usare Groq invece di OpenAI
+groq>=0.11.0
+langchain-groq>=0.1.0
