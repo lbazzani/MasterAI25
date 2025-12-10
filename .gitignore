@@ -9,6 +9,7 @@ AgentAI/output/
 Pytorch/results/
 Pytorch/sentiment-model/
 intent-classifier-tf/__pycache__/
+intent-classifier-tf/intent_model/
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json

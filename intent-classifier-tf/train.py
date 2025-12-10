@@ -90,7 +90,9 @@ print(f"Test Accuracy: {test_acc:.2%}")
 print(f"Test Loss: {test_loss:.4f}")
 
 # Salva modello e artifacts
-model.save('intent_model')
+import os
+os.makedirs('intent_model', exist_ok=True)
+model.save('intent_model/model.keras')
 with open('intent_model/tokenizer.pkl', 'wb') as f:
     pickle.dump(tokenizer, f)
 with open('intent_model/label_encoder.pkl', 'wb') as f:
